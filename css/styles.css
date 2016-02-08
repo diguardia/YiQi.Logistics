@@ -1,0 +1,81 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.container { padding-top: 15px; }
+
+.logo { float:left; padding-top:10px; }
+
+.header_bg {width:100%; height:96px; background: rgba(244, 36, 52, 0.9); background-repeat: repeat-x; }
+
+.principal { margin-top:120px; }
+
+.principal h1{ font-size: 44px; font-weight:300; letter-spacing: -0.5px; font-family: 'Lato', sans-serif; }
+
+.principal h2{ font-size: 34px; font-weight:300; letter-spacing: -0.5px; font-family: 'Lato', sans-serif; }
+
+.page-header { border-bottom: 1px solid #d9d9d9; }
+
+.page-header-enviado { border-bottom: 1px solid #d9d9d9; background-image:url(../images/icon_enviar_guia.png); background-position:right; background-repeat:no-repeat; }
+
+.page-header-historial { border-bottom: 1px solid #d9d9d9; background-image:url(../images/icon_historial.png); background-position:right; background-repeat:no-repeat; }
+
+p { font-size:17px; color:#777777; font-family: 'Lato', sans-serif; }
+
+.space { width:100%; padding-top:30px; }
+
+.space-large { width:100%; padding-top:60px; }
+
+.form-control { border: solid 1px #d50029; border-width: 0px 0px 1px 0px; border-radius:0px; box-shadow: none; color:#d40029; font-size:17px; height:40px; font-family: 'Lato', sans-serif; }
+
+.grey { border: solid 1px #d9d9d9; border-width: 0px 0px 1px 0px; border-radius:0px; box-shadow: none; color:#333333; font-size:17px; height:40px; font-family: 'Lato', sans-serif; }
+
+.search { background-image:url(../images/icon_search.png); background-position:right; background-repeat:no-repeat; font-family: 'Lato', sans-serif; }
+
+.btn-default {width:100%; background-color:#fff; color:#d40029; border-radius:25px; height:49px; border: 2px solid #d40029; font-family: 'Lato', sans-serif; }
+
+.btn {font-size:17px; text-align:left; padding-left: 25px; font-family: 'Lato', sans-serif; }
+
+.btn-default:hover {width:100%; background-color:#d40029; color:#fff; border-radius:25px; height:49px; border: 2px solid transparent; font-family: 'Lato', sans-serif; }
+
+.btn-cargamanual {width:100%; background-color:#fff; color:#d40029; border-radius:25px; height:49px; border: 2px solid #d40029; background-image:url(../images/icon_carga_manual.png); background-repeat:no-repeat; background-position:right; font-family: 'Lato', sans-serif; }
+
+.btn-cargamanual:hover {width:100%; background-color:#d40029; color:#fff; border-radius:25px; height:49px; border: 2px solid transparent; background-image:url(../images/icon_carga_manual_h.png); background-repeat:no-repeat; background-position:right; font-family: 'Lato', sans-serif; }
+
+.btn-cargamasiva {width:100%; background-color:#fff; color:#d40029; border-radius:25px; height:49px; border: 2px solid #d40029; background-image:url(../images/icon_carga_masiva.png); background-repeat:no-repeat; background-position:right; font-family: 'Lato', sans-serif; }
+
+.btn-cargamasiva:hover {width:100%; background-color:#d40029; color:#fff; border-radius:25px; height:49px; border: 2px solid transparent; background-image:url(../images/icon_carga_masiva_h.png); background-repeat:no-repeat; background-position:right; font-family: 'Lato', sans-serif;}
+
+.btn-agregarpedido {width:100%; background-color:#fff; color:#d40029; border-radius:25px; height:49px; border: 2px solid #d40029; background-image:url(../images/icon_agregar_pedido.png); background-repeat:no-repeat; background-position:right; font-family: 'Lato', sans-serif; }
+
+.btn-agregarpedido:hover {width:100%; background-color:#d40029; color:#fff; border-radius:25px; height:49px; border: 2px solid transparent; background-image:url(../images/icon_agregar_pedido_h.png); background-repeat:no-repeat; background-position:right; font-family: 'Lato', sans-serif; }
+
+.btn-enviarguia {width:100%; background-color:#fff; color:#d40029; border-radius:25px; height:49px; border: 2px solid #d40029; background-image:url(../images/icon_enviar_guia.png); background-repeat:no-repeat; background-position:right;font-family: 'Lato', sans-serif; }
+
+.btn-enviarguia:hover {width:100%; background-color:#d40029; color:#fff; border-radius:25px; height:49px; border: 2px solid transparent; background-image:url(../images/icon_enviar_guia_h.png); background-repeat:no-repeat; background-position:right; font-family: 'Lato', sans-serif;}
+
+.btn-descargarplantilla {width:100%; background-color:#fff; color:#d40029; border-radius:25px; height:49px; border: 2px solid #d40029; background-image:url(../images/icon_descargar_plantilla.png); background-repeat:no-repeat; background-position:right; font-family: 'Lato', sans-serif; }
+
+.btn-descargarplantilla:hover {width:100%; background-color:#d40029; color:#fff; border-radius:25px; height:49px; border: 2px solid transparent; background-image:url(../images/icon_descargar_plantilla_h.png); background-repeat:no-repeat; background-position:right; font-family: 'Lato', sans-serif;}
+
+.btn-importarpedidos {width:100%; background-color:#fff; color:#d40029; border-radius:25px; height:49px; border: 2px solid #d40029; background-image:url(../images/icon_importar_pedidos.png); background-repeat:no-repeat; background-position:right; font-family: 'Lato', sans-serif; }
+
+.btn-importarpedidos:hover {width:100%; background-color:#d40029; color:#fff; border-radius:25px; height:49px; border: 2px solid transparent; background-image:url(../images/icon_importar_pedidos_h.png); background-repeat:no-repeat; background-position:right; font-family: 'Lato', sans-serif; }
+
+.btn-todasguias {width:100%; background-color:#fff; color:#d40029; border-radius:25px; height:49px; border: 2px solid #d40029; background-image:url(../images/icon_todas_guias.png); background-repeat:no-repeat; background-position:right; font-family: 'Lato', sans-serif;}
+
+.btn-todasguias:hover {width:100%; background-color:#d40029; color:#fff; border-radius:25px; height:49px; border: 2px solid transparent; background-image:url(../images/icon_todas_guias_h.png); background-repeat:no-repeat; background-position:right; font-family: 'Lato', sans-serif; }
+
+.btn-todospedidos {width:100%; background-color:#fff; color:#d40029; border-radius:25px; height:49px; border: 2px solid #d40029; background-image:url(../images/icon_todos_pedidos.png); background-repeat:no-repeat; background-position:right; font-family: 'Lato', sans-serif; }
+
+.btn-todospedidos:hover {width:100%; background-color:#d40029; color:#fff; border-radius:25px; height:49px; border: 2px solid transparent; background-image:url(../images/icon_todos_pedidos_h.png); background-repeat:no-repeat; background-position:right; font-family: 'Lato', sans-serif; }
+
+.alerta { float:left; color: #d40029; font-size:17px; font-family: 'Lato', sans-serif; }
+
+a { color:#d60021; }
+
+a:hover { color:#d60021; text-decoration:underline; }
+
+.nav>li>a { font-size: 17px; font-family: 'Lato', sans-serif; }
+
+.nav-pills>li>a:hover { color:#000; background-color:transparent; font-family: 'Lato', sans-serif; }
+
