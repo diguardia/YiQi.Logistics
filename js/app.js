@@ -7,17 +7,12 @@ var app =
         // Desa
         //SCHEMA_ID: 41,
         //SERVER_URL: "http://localhost:5001/", 
-        username: "",
-        password: "", // Mejor un token
-
-        ENTITY_PEDIDO_ID: 9,
-        ENTITY_PEDIDO_USA_ID: 21,
-        newGuideNumber: 0,
-        newGuideId: 0,
+        ENTITY_TALLY_ID: 861,
 
         init: function () {
             app.loadStaticData();
             app.showLogin();
+            libs.enableDebug();
         },
 
         showLogin: function () {
@@ -38,6 +33,8 @@ var app =
             $("#divMain").show();
             $("#divLinksHeaders").show();
             $("#divTally").hide();
+            
+            app.images = {};
         },
 
         showTally: function () {
@@ -67,6 +64,7 @@ var app =
                                },
                 type: "POST",
                 }).done(function (data) {
+                    libs.setToken(data.access_token);
                     // TODO: Mejor un token
                     app.username = $("#loginUsername").val();
                     app.password = $("#loginPassword").val();
@@ -83,7 +81,7 @@ var app =
                             $("#butLogin").show();
                             $("#loadingLogin").hide();
                             $("#divErrorLogin").show();
-                            $("#divErrorLogin").text("No es posible establecer la conexión");
+                            $("#divErrorLogin").text("No es posible establecer la conexión " + textStatus);
                 });
         },
 
@@ -93,47 +91,10 @@ var app =
             app.showLogin();
         },
 
-        import: function () {
-            var fileElem = document.getElementById("fileElem");
-            fileElem.click();
+        submitTally: function () {
+            app.callRPC({url: "/instances"})    
         },
-
-        handleFiles: function (files) {
-            $("#divErrorImportMasive").hide();
-            var file = files[0];
-            var data = new FormData();
-            data.append('file-0', file);
-            data.append("schemaId", app.SCHEMA_ID);
-            data.append("payload", JSON.stringify({ entityId: (app.isUSA() ? app.ENTITY_PEDIDO_USA_ID : app.ENTITY_PEDIDO_ID), username: app.username, password: app.password }));
-            $(".sendingGuide").show();
-            app.callRPC({
-                url: "/api/instancesapi/UploadAndImportExcel",
-                contentType: false, //"application/octet-stream", //file.type,
-                serializeData: false,
-                data: data,
-                post: true,
-                callback: function (data) {
-                    $(".sendingGuide").hide();
-                    var arr = data.split("|");
-                    if (arr[0] == "OK") {
-                        app.newGuideId = null;//c.newId;						
-                        app.showSentConfirmation();
-                    } else {
-                        var error = arr[1].split("-   at")[0];
-                        $("#divErrorImportMasive").show();
-                        $("#divErrorImportMasive").html(error.replace(/\n/g, "<br>"));
-                    }
-                },
-                errorCallback: function (error) {
-                    $(".sendingGuide").hide();
-                    error = error.split("-   at")[0];
-                    $("#divErrorImportMasive").show();
-                    //				$("#mainError").html(c.error.replace(/\n/g, "<br>"));
-                    $("#divErrorImportMasive").html(error.replace(/\n/g, "<br>"));
-                }
-            })
-        },
-
+        
         callRPC: function (p) {
             var type;
 
@@ -143,11 +104,19 @@ var app =
             } else {
                 type = "GET";
             }
+            var token = libs.getToken();
+            var headers = {};
+            if (token) {
+                headers.Authorization = 'Bearer ' + token;
+            }
 
             $.ajax({url: app.SERVER_URL + p.url,
-                data: (p.post ? JSON.stringify(p.data) : p.data),
-                type: type,
-                dataType: 'json'
+                    data: (p.post && p.processData == null ? JSON.stringify(p.data) : p.data),
+                    type: type,
+                    dataType: 'json',
+                    headers: headers,
+                    processData: p.processData == null? true : p.processData,
+                    contentType: p.contentType == null? "application/json; charset=utf-8": p.contentType
                 }).done(function (result) {
                     p.callback(result);
                 })
@@ -162,9 +131,14 @@ var app =
                 });
         },
 
-        capturePhoto: function (i) {
+        capturePhoto: function (imgBut) {
             try {
-                navigator.camera.getPicture(function () { $(i).addClass("btn-success"); }, function () { alert("error"); });
+                navigator.camera.getPicture(
+                    function (image) {
+                        app.images[imgBut.id] = image;  
+                        $(imgBut).addClass("btn-success"); }, 
+                    function () { alert("error"); }
+                );
             }
             catch (ex)
             { alert(ex); }
@@ -172,3 +146,39 @@ var app =
     }
 
 $(function () { app.init(); });
+
+function handleFiles(files) {
+    
+    		var file = files[0];
+		var data = new FormData();
+		data.append('file-0', file);
+		data.append("schemaId", app.SCHEMA_ID);	
+		data.append("payload", JSON.stringify ({entityId: app.ENTITY_TALLY_ID }) );
+
+    app.callRPC({
+			url: "/api/instancesapi/SaveFile",
+			contentType: false, 
+			processData: false,
+			data: data,
+			post: true,
+			callback: function (data) {
+				$(".sendingGuide").hide();	
+				var arr = data.split("|");
+				if (arr[0] == "OK") {
+					app.newGuideId = null;//c.newId;						
+					app.showSentConfirmation();
+				} else {
+					var error = arr[1].split ("-   at")[0];
+					$("#divErrorImportMasive").show();
+					$("#divErrorImportMasive").html(error.replace(/\n/g, "<br>"));
+				}	
+			},
+			errorCallback: function (error) {
+				$(".sendingGuide").hide();	
+				error = error.split ("-   at")[0];
+				$("#divErrorImportMasive").show();
+//				$("#mainError").html(c.error.replace(/\n/g, "<br>"));
+				$("#divErrorImportMasive").html(error.replace(/\n/g, "<br>"));
+			}
+		})
+}
