@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -126,8 +126,8 @@
                 <H2>Cabecera</H2>
                 <div class="form-group">
                     <select type="name" class="form-control" id="tCliente" placeholder="Cliente/Origen" required>
-                        <option>Falabella</option>
-                        <option>Cliente 2</option>
+                        <option value="273" >Falabella</option>
+                        <option value="2">Cliente 2</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -137,16 +137,16 @@
                     <input type="date" class="form-control" id="tFechaRecepcion" placeholder="Fecha recepción" required>
                 </div>
                 <div class="form-group">
-                    <input type="name" class="form-control" id="tRto" placeholder="Remito" required>
+                    <input type="number" class="form-control" id="tRto" placeholder="Remito" required>
                 </div>
                 <div class="form-group">
-                    <input type="name" class="form-control" id="tPrecintos" placeholder="Precintos" required>
+                    <input type="number" class="form-control" id="tPrecintos" placeholder="Precintos" required>
                 </div>
                 <div class="form-group">
                     <input type="name" class="form-control" id="tTipoDeUnidad" placeholder="Tipo de unidad" required>
                 </div>
                 <div class="form-group">
-                    <input type="name" class="form-control" id="tNroContenedor" placeholder="Nro Contenedor" required>
+                    <input type="number" class="form-control" id="tNroContenedor" placeholder="Nro Contenedor" required>
                 </div>
                 <div class="form-group">
                     <input type="name" class="form-control" id="tChofer" placeholder="Chofer" required>
@@ -157,9 +157,9 @@
                 <div class="form-group">
                     <input type="name" class="form-control" id="tPatentes" placeholder="Patentes" required>
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <input type="number" class="form-control" id="tPallets" placeholder="Pallets" required>
-                </div>
+                </div>-->
                 <H2>Imágenes</H2>
                 <div class="form-group">
                     <input type="button" class="form-control" id="tFile1" value="Camión Cerrado" required onclick="app.capturePhoto(this)">
