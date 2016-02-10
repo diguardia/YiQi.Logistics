@@ -11,7 +11,7 @@ var app =
 
         init: function () {
             app.loadStaticData();
-            app.showLogin();
+            if (app.checkToken(function () { app.showMain() }, function () { app.showLogin() }));
         },
 
         showLogin: function () {
@@ -46,6 +46,12 @@ var app =
             $("#divMain").hide();
             $("#divTally").show();
             $("#tallyError").hide();
+        },
+
+        checkToken: function (ok, noOk) {
+            var token = libs.getToken();
+            if (!token) { noOk(); }// No tenía token
+            else { libs.callRPC({ url: "/api/accountapi/nop", callback: ok, errorCallback: noOk }); }
         },
 
         loadStaticData: function () {/*
@@ -132,11 +138,12 @@ var app =
                     function (fileURI) {
                         window.resolveLocalFileSystemURI(fileURI,
                             function (fileEntry) {
-                                app.uploadFile(fileEntry);
+                                app.uploadFile(fileEntry.file());
+                                app.images[imgBut.id] = fileURI.fullPath;
+                                $(imgBut).addClass("btn-success");
                             },
-                            function () { });
-                        app.images[imgBut.id] = fileURI.fullPath;
-                        $(imgBut).addClass("btn-success");
+                            function (e) { alert("Error subiendo la foto " + e); });
+
                     }
                     , function () { alert("error"); }
                     , { destinationType: window.Camera.DestinationType.FILE_URI }
