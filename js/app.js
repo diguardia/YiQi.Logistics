@@ -98,7 +98,7 @@ var app =
 
         submitTally: function () {
             $("#tallyError").hide();
-            app.callRPC(
+            libs.callRPC(
                 {
                     url: "api/instancesapi/SaveInstanceFull"
                     , data: {
@@ -114,54 +114,57 @@ var app =
                 });
         },
 
-        callRPC: function (p) {
-            var type;
-
-            if (p.post == null) { p.post = false; }
-            if (p.post) {
-                type = "POST";
-            } else {
-                type = "GET";
-            }
-            var token = libs.getToken();
-            var headers = {};
-            if (token) {
-                headers.Authorization = 'Bearer ' + token;
-            }
-
-            $.ajax({
-                url: app.SERVER_URL + p.url,
-                data: (p.post && p.processData == null ? JSON.stringify(p.data) : p.data),
-                type: type,
-                dataType: 'json',
-                headers: headers,
-                processData: p.processData == null ? true : p.processData,
-                contentType: p.contentType == null ? "application/json; charset=utf-8" : p.contentType
-            }).done(function (result) {
-                p.callback(result);
-            })
-                .fail(function (jqXHR, textStatus) {
-                    console.log(jqXHR, textStatus);
-                    if (p.errorCallback != null) {
-                        p.errorCallback(textStatus);
-                    }
-                    else {
-                        //                windowsManagement.manageError(jqXHR.status, p.windowId, jqXHR.responseText);
-                    }
-                });
-        },
-
         capturePhoto: function (imgBut) {
             try {
                 navigator.camera.getPicture(
-                    function (image) {
-                        app.images[imgBut.id] = image;
+                    function (fileURI) {
+                        window.resolveLocalFileSystemURI(fileURI,
+                            function (fileEntry) {
+                                app.uploadFile(fileEntry);
+                            },
+                            function () { });
+                        app.images[imgBut.id] = fileURI.fullPath;
                         $(imgBut).addClass("btn-success");
-                    },
-                    function () { alert("error"); }
+                    }
+                    , function () { alert("error"); }
+                    , { destinationType: window.Camera.DestinationType.FILE_URI }
                     );
             }
             catch (ex) { alert(ex); }
+        },
+
+        uploadFile: function (file) {
+            var data = new FormData();
+            data.append('file-0', file);
+            data.append("schemaId", app.SCHEMA_ID);
+            data.append("payload", JSON.stringify({ entityId: app.ENTITY_TALLY_ID }));
+
+            libs.callRPC({
+                url: "/api/instancesapi/SaveFile",
+                contentType: false,
+                processData: false,
+                data: data,
+                post: true,
+                callback: function (data) {
+                    $(".sendingGuide").hide();
+                    var arr = data.split("|");
+                    if (arr[0] == "OK") {
+                        app.newGuideId = null;//c.newId;						
+                        app.showSentConfirmation();
+                    } else {
+                        var error = arr[1].split("-   at")[0];
+                        $("#divErrorImportMasive").show();
+                        $("#divErrorImportMasive").html(error.replace(/\n/g, "<br>"));
+                    }
+                },
+                errorCallback: function (error) {
+                    $(".sendingGuide").hide();
+                    error = error.split("-   at")[0];
+                    $("#divErrorImportMasive").show();
+                    //				$("#mainError").html(c.error.replace(/\n/g, "<br>"));
+                    $("#divErrorImportMasive").html(error.replace(/\n/g, "<br>"));
+                }
+            });
         }
     }
 
@@ -169,35 +172,5 @@ $(function () { app.init(); });
 
 function handleFiles(files) {
     var file = files[0];
-    var data = new FormData();
-    data.append('file-0', file);
-    data.append("schemaId", app.SCHEMA_ID);
-    data.append("payload", JSON.stringify({ entityId: app.ENTITY_TALLY_ID }));
-
-    app.callRPC({
-        url: "/api/instancesapi/SaveFile",
-        contentType: false,
-        processData: false,
-        data: data,
-        post: true,
-        callback: function (data) {
-            $(".sendingGuide").hide();
-            var arr = data.split("|");
-            if (arr[0] == "OK") {
-                app.newGuideId = null;//c.newId;						
-                app.showSentConfirmation();
-            } else {
-                var error = arr[1].split("-   at")[0];
-                $("#divErrorImportMasive").show();
-                $("#divErrorImportMasive").html(error.replace(/\n/g, "<br>"));
-            }
-        },
-        errorCallback: function (error) {
-            $(".sendingGuide").hide();
-            error = error.split("-   at")[0];
-            $("#divErrorImportMasive").show();
-            //				$("#mainError").html(c.error.replace(/\n/g, "<br>"));
-            $("#divErrorImportMasive").html(error.replace(/\n/g, "<br>"));
-        }
-    })
+    app.uploadFile(file);
 }
