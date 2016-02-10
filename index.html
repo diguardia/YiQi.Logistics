@@ -115,37 +115,93 @@
                     <button type="button" class="btn btn-default" onclick="app.showProcess();">Cargar Proceso</button>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="mainMsg" class="bg-success"> </div>
+                </div>
+            </div>
         </div>
         <div id="divTally">
             <form role="form" data-toggle="validator" id="formLogin">
                 <H2>Cabecera</H2>
-                <div class="form-group"><select type="name" class="form-control" id="tCliente" placeholder="Cliente/Origen" required><option>Falabella</option><option>Cliente 2</option></select></div>
-                <div class="form-group"><input type="name" class="form-control" id="tPuerto" placeholder="Puerto" required></div>
-                <div class="form-group"><input type="date" class="form-control" id="tFechaRecepcion" placeholder="Fecha recepción" required></div>
-                <div class="form-group"><input type="name" class="form-control" id="tRto" placeholder="Remito" required></div>
-                <div class="form-group"><input type="name" class="form-control" id="tPrecintos" placeholder="Precintos" required></div>
-                <div class="form-group"><input type="name" class="form-control" id="tTipoDeUnidad" placeholder="Tipo de unidad" required></div>
-                <div class="form-group"><input type="name" class="form-control" id="tNroContenedor" placeholder="Nro Contenedor" required></div>
-                <div class="form-group"><input type="name" class="form-control" id="tChofer" placeholder="Chofer" required></div>
-                <div class="form-group"><input type="number" class="form-control" id="tBultosSegunRTOPL" placeholder="Bultos Según Rto/PL" required></div>
-                <div class="form-group"><input type="name" class="form-control" id="tPatentes" placeholder="Patentes" required></div>
-                <div class="form-group"><input type="number" class="form-control" id="tPallets" placeholder="Pallets" required></div>
-                <H2>Imágenes</H2>
-                <div class="form-group"><input type="button" class="form-control" id="tFile1"  value="Camión Cerrado" required onclick="app.capturePhoto(this)">
-                <input type="file" onchange="handleFiles(this.files)"/>
+                <div class="form-group">
+                    <select type="name" class="form-control" id="tCliente" placeholder="Cliente/Origen" required>
+                        <option>Falabella</option>
+                        <option>Cliente 2</option>
+                    </select>
                 </div>
-                <div class="form-group"><input type="button" class="form-control" id="tFile1"  value="Precinto" required onclick="app.capturePhoto(this)"></div>
-                <div class="form-group"><input type="button" class="form-control" id="tFile1"  value="Abierto antes de atracar" required onclick="app.capturePhoto(this)"></div>
-                <div class="form-group"><input type="button" class="form-control" id="tFile1"  value="Al 80%" required onclick="app.capturePhoto(this)"></div>
-                <div class="form-group"><input type="button" class="form-control" id="tFile1"  value="Al 50%" required onclick="app.capturePhoto(this)"></div>
-                <div class="form-group"><input type="button" class="form-control" id="tFile1"  value="Vacío" required onclick="app.capturePhoto(this)"></div>
-                <div class="form-group"><input type="button" class="form-control" id="tFile1"  value="Remito" required onclick="app.capturePhoto(this)"></div>
-                <div class="form-group"><input type="button" class="form-control" id="tFile1"  value="Anomalía 1" required onclick="app.capturePhoto(this)"></div>
-                <div class="form-group"><input type="button" class="form-control" id="tFile1"  value="Anomalía 2" required onclick="app.capturePhoto(this)"></div>
-                <div class="form-group"><input type="button" class="form-control" id="tFile1"  value="Anomalía 3" required onclick="app.capturePhoto(this)"></div>
-                <div class="form-group"><input type="button" class="form-control" id="tFile1"  value="Anomalía 4" required onclick="app.capturePhoto(this)"></div>
-                <div class="form-group"><input type="button" class="form-control" id="tFile1"  value="Anomalía 5" required onclick="app.capturePhoto(this)"></div>
-                                    <button type="button" class="btn btn-default" onclick="app.submitTally();">Subir Tally</button><br/>
+                <div class="form-group">
+                    <input type="name" class="form-control" id="tPuerto" placeholder="Puerto" required>
+                </div>
+                <div class="form-group">
+                    <input type="date" class="form-control" id="tFechaRecepcion" placeholder="Fecha recepción" required>
+                </div>
+                <div class="form-group">
+                    <input type="name" class="form-control" id="tRto" placeholder="Remito" required>
+                </div>
+                <div class="form-group">
+                    <input type="name" class="form-control" id="tPrecintos" placeholder="Precintos" required>
+                </div>
+                <div class="form-group">
+                    <input type="name" class="form-control" id="tTipoDeUnidad" placeholder="Tipo de unidad" required>
+                </div>
+                <div class="form-group">
+                    <input type="name" class="form-control" id="tNroContenedor" placeholder="Nro Contenedor" required>
+                </div>
+                <div class="form-group">
+                    <input type="name" class="form-control" id="tChofer" placeholder="Chofer" required>
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" id="tBultosSegunRTOPL" placeholder="Bultos Según Rto/PL" required>
+                </div>
+                <div class="form-group">
+                    <input type="name" class="form-control" id="tPatentes" placeholder="Patentes" required>
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" id="tPallets" placeholder="Pallets" required>
+                </div>
+                <H2>Imágenes</H2>
+                <div class="form-group">
+                    <input type="button" class="form-control" id="tFile1" value="Camión Cerrado" required onclick="app.capturePhoto(this)">
+                    <input type="file" onchange="handleFiles(this.files)" />
+                </div>
+                <div class="form-group">
+                    <input type="button" class="form-control" id="tFile1" value="Precinto" required onclick="app.capturePhoto(this)">
+                </div>
+                <div class="form-group">
+                    <input type="button" class="form-control" id="tFile1" value="Abierto antes de atracar" required onclick="app.capturePhoto(this)">
+                </div>
+                <div class="form-group">
+                    <input type="button" class="form-control" id="tFile1" value="Al 80%" required onclick="app.capturePhoto(this)">
+                </div>
+                <div class="form-group">
+                    <input type="button" class="form-control" id="tFile1" value="Al 50%" required onclick="app.capturePhoto(this)">
+                </div>
+                <div class="form-group">
+                    <input type="button" class="form-control" id="tFile1" value="Vacío" required onclick="app.capturePhoto(this)">
+                </div>
+                <div class="form-group">
+                    <input type="button" class="form-control" id="tFile1" value="Remito" required onclick="app.capturePhoto(this)">
+                </div>
+                <div class="form-group">
+                    <input type="button" class="form-control" id="tFile1" value="Anomalía 1" required onclick="app.capturePhoto(this)">
+                </div>
+                <div class="form-group">
+                    <input type="button" class="form-control" id="tFile1" value="Anomalía 2" required onclick="app.capturePhoto(this)">
+                </div>
+                <div class="form-group">
+                    <input type="button" class="form-control" id="tFile1" value="Anomalía 3" required onclick="app.capturePhoto(this)">
+                </div>
+                <div class="form-group">
+                    <input type="button" class="form-control" id="tFile1" value="Anomalía 4" required onclick="app.capturePhoto(this)">
+                </div>
+                <div class="form-group">
+                    <input type="button" class="form-control" id="tFile1" value="Anomalía 5" required onclick="app.capturePhoto(this)">
+                </div>
+                <button type="button" class="btn btn-default" onclick="app.submitTally();">Subir Tally</button>
+                <br/>
+                <div id="tallyError" class="alerta"> </div>
+                <br/>
             </form>
         </div>
     </div>
