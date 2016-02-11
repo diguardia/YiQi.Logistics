@@ -1,20 +1,21 @@
-var app =
+var app=
     {
-        requests: [],
         // Prod
         SCHEMA_ID: 35, // SPF
         SERVER_URL: "http://me.yiqi.com.ar/", 
-        // Desa
-        //SCHEMA_ID: 41,
-        //SERVER_URL: "http://localhost:5001/", 
         ENTITY_TALLY_ID: 861,
+
+        // Desa
+        //SCHEMA_ID: 2,
+        //SERVER_URL: "http://localhost:5001/", 
+        //ENTITY_TALLY_ID: 64,
 
         init: function () {
             app.loadStaticData();
             if (app.checkToken(function () { app.showMain() }, function () { app.showLogin() }));
         },
 
-        showLogin: function () {
+        showLogin:function () {
             $("#divLogin").show();
             $("#divLinksHeaders").hide();
             $("#divMain").hide();
@@ -54,13 +55,13 @@ var app =
             else { libs.callRPC({ url: "/api/accountapi/nop", callback: ok, errorCallback: noOk }); }
         },
 
-        loadStaticData: function () {/*
-            $.each(paises, function () {
-                $("[name=PEDI_COUNTRY_CODE]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
-                $("[name=PEDI_MANUFACTURER_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
-                $("[name=PEDU_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
-                $("[name=PEDU_CONSIGNEE_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
-            });*/
+        loadStaticData:function () {
+//            $.each(paises, function () {
+//                $("[name=PEDI_COUNTRY_CODE]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
+//               $("[name=PEDI_MANUFACTURER_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
+//                $("[name=PEDU_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
+//                $("[name=PEDU_CONSIGNEE_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
+//            });
         },
 
         login: function () {
@@ -122,9 +123,18 @@ var app =
                             TALL_CANT_BULTOS_SEGUN_RE: $("#tBultosSegunRTOPL").val(), // esto es una formula, hay que agregar un atributo nuevo?
                             TALL_PATENTES: $("#tPatentes").val(),
                             //TALL_PALLETS: $("#tPallets").val()//esto tambien es una formula
-                        })
+                        })                        
+                         , jsonNewFiles: JSON.stringify(app.images)
+                        , jsonRemovedFiles: JSON.stringify([])
                     }
-                    , callback: function (c) { app.showMain("Tally subido con éxito"); }
+                    , callback:function (c) { 
+                        if (c.ok) {
+                            app.showMain("Tally subido con éxito"); 
+                        } else {
+                            $("#tallyError").text(c.error);
+                            $("#tallyError").show();
+                        }
+                    }
                     , errorCallback: function (e) {
                         $("#tallyError").text("Error al subir el tally " + e);
                         $("#tallyError").show();
@@ -138,9 +148,8 @@ var app =
                     function (fileURI) {
                         window.resolveLocalFileSystemURI(fileURI,
                             function (fileEntry) {
-                                app.uploadFile(fileEntry.file());
-                                app.images[imgBut.id] = fileURI.fullPath;
-                                $(imgBut).addClass("btn-success");
+                                app.uploadFile(fileEntry.file(), imgBut);
+
                             },
                             function (e) { alert("Error subiendo la foto " + e); });
 
@@ -152,7 +161,7 @@ var app =
             catch (ex) { alert(ex); }
         },
 
-        uploadFile: function (file) {
+        uploadFile: function (file, imgBut) {
             var data = new FormData();
             data.append('file-0', file);
             data.append("schemaId", app.SCHEMA_ID);
@@ -165,31 +174,19 @@ var app =
                 data: data,
                 post: true,
                 callback: function (data) {
-                    $(".sendingGuide").hide();
-                    var arr = data.split("|");
-                    if (arr[0] == "OK") {
-                        app.newGuideId = null;//c.newId;						
-                        app.showSentConfirmation();
-                    } else {
-                        var error = arr[1].split("-   at")[0];
-                        $("#divErrorImportMasive").show();
-                        $("#divErrorImportMasive").html(error.replace(/\n/g, "<br>"));
-                    }
+                    app.images[imgBut.id] = file.name;
+                    $(imgBut).addClass("btn-success");
                 },
                 errorCallback: function (error) {
-                    $(".sendingGuide").hide();
-                    error = error.split("-   at")[0];
-                    $("#divErrorImportMasive").show();
-                    //				$("#mainError").html(c.error.replace(/\n/g, "<br>"));
-                    $("#divErrorImportMasive").html(error.replace(/\n/g, "<br>"));
+                    $(imgBut).addClass("btn-alert");
                 }
             });
         }
     }
 
-$(function () { app.init(); });
+$( function () {app.init(); });
 
 function handleFiles(files) {
     var file = files[0];
-    app.uploadFile(file);
+    app.uploadFile(file, $("#TALL_FOTO_1")[0]);
 }

@@ -26,7 +26,7 @@ var libs = {
                 url: app.SERVER_URL + p.url,
                 data: (p.post && p.processData == null ? JSON.stringify(p.data) : p.data),
                 type: type,
-                dataType: 'json',
+            //    dataType: 'json',
                 headers: headers,
                 processData: p.processData == null ? true : p.processData,
                 contentType: p.contentType == null ? "application/json; charset=utf-8" : p.contentType
