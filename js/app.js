@@ -148,8 +148,7 @@ var app=
                     function (fileURI) {
                         window.resolveLocalFileSystemURI(fileURI,
                             function (fileEntry) {
-                                app.uploadFile(fileEntry.file(), imgBut);
-
+                                fileEntry.file(function (f) {app.uploadFile(f, imgBut);}, function (e) {alert (e); } );
                             },
                             function (e) { alert("Error subiendo la foto " + e); });
 
