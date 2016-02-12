@@ -194,9 +194,10 @@ var app=
         },
         
         uploadFilePG: function (imageURI, imgBut) {
+            var fileName = imageURI.substr(imageURI.lastIndexOf('/')+1);
             var options = new FileUploadOptions();
             options.fileKey="file";
-            options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);;
+            options.fileName = fileName;
             //options.mimeType="image/jpeg";
 
             var params = new Object();
@@ -215,7 +216,7 @@ var app=
             var ft = new FileTransfer();
             ft.upload( imageURI, encodeURI(app.SERVER_URL + "api/instancesApi/SaveFile"),
                 function(result) {
-                    app.images[imgBut.id] = file.name;
+                    app.images[imgBut.id] = fileName;
                     $(imgBut).addClass("btn-success");
                 },
                 function(error) {
