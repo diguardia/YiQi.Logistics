@@ -182,24 +182,20 @@ var app=
             });
         },
         
-        uploadFilePG: function (mediaFile) {
-            path = mediaFile.fullPath;
-            name = mediaFile.name;
-            
+        uploadFilePG: function (imageURI, imgBut) {
             var options = new FileUploadOptions();
             options.fileKey="file";
-            options.fileName=mediaFile.name;
+            options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);;
             //options.mimeType="image/jpeg";
 
             var params = new Object();
-            params.fullpath = path;
-            params.name = name;
+            params.schemaId = app.SCHEMA_ID;
 
             options.params = params;
             options.chunkedMode = false;
             
             var ft = new FileTransfer();
-            ft.upload( path, app.SERVER_URL + "SaveFile",
+            ft.upload( imageURI, app.SERVER_URL + "SaveFile",
                 function(result) {
                     app.images[imgBut.id] = file.name;
                     $(imgBut).addClass("btn-success");
