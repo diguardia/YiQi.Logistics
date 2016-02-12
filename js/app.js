@@ -10,8 +10,7 @@ var app =
         //SERVER_URL: "http://localhost:5001/", 
         //ENTITY_TALLY_ID: 64,
 
-        init: function () {
-            app.loadStaticData();
+        init: function () { 
             if (app.checkToken(function () { app.showMain() }, function () { app.showLogin() }));
         },
 
@@ -29,8 +28,12 @@ var app =
         },
 
         showMain: function (msg) {
+            if (!app.isStaticDataLoaded) {
+                app.loadStaticData(function() {$("#divMain").show();});
+            } else {
+                $("#divMain").show();
+            }
             $("#divLogin").hide();
-            $("#divMain").show();
             $("#divLinksHeaders").show();
             $("#divTally").hide();
 
@@ -56,6 +59,8 @@ var app =
         },
 
         loadStaticData: function () {
+            // Call RPC y después completar los combos de cliente y tipo de unidad
+            
             //            $.each(paises, function () {
             //                $("[name=PEDI_COUNTRY_CODE]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
             //               $("[name=PEDI_MANUFACTURER_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
