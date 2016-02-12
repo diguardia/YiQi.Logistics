@@ -38,6 +38,8 @@ var app =
             $("#divLogin").hide();
             $("#divLinksHeaders").show();
             $("#divTally").hide();
+            var date = new Date();
+            $("#tFechaRecepcion").val(date.toISOString().split('T')[0]);
 
             if (msg) {
                 $("#mainMsg").show();
@@ -146,16 +148,18 @@ var app =
                     , callback: function (c) {
                         if (c.ok) {
                             app.showMain("Tally subido con éxito");
-                            $("#tChofer").val(""),
-                            $("#tCliente").val(""),
-                            $("#tPuerto").val(""),
-                            $("#tFechaRecepcion").val(""),
-                            $("#tRto").val(""),
-                            $("#tPrecintos").val(""),
-                            $("#tTipoDeUnidad").val(""),
-                            $("#tNroContenedor").val(""),
-                            $("#tBultosSegunRTOPL").val(""),
-                            $("#tPatentes").val("")
+                            $("#tChofer").val("");
+                            $("#tCliente").val("");
+                            $("#tPuerto").val("");
+                            var date=new Date();
+                            $("#tFechaRecepcion").val(date.toISOString().split('T')[0]);
+                            
+                            $("#tRto").val("");
+                            $("#tPrecintos").val("");
+                            $("#tTipoDeUnidad").val("");
+                            $("#tNroContenedor").val("");
+                            $("#tBultosSegunRTOPL").val("");
+                            $("#tPatentes").val("");
                             //$("#tPallets").val()//esto tambien es una formula
                         } else {
 
