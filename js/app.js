@@ -146,12 +146,12 @@ var app=
             try {
                 navigator.camera.getPicture(
                     function (fileURI) {
-                        window.resolveLocalFileSystemURI(fileURI,
-                            function (fileEntry) {
-                                fileEntry.file(function (f) {app.uploadFile(f, imgBut);}, function (e) {alert (e); } );
-                            },
-                            function (e) { alert("Error subiendo la foto " + e); });
-
+                            app.uploadFilePG(fileURI, imgBut);
+                            // window.resolveLocalFileSystemURI(fileURI,
+                            //function (fileEntry) {
+                            //    fileEntry.file(function (f) {app.uploadFilePG(f, imgBut);}, function (e) {alert (e); } );
+                            //},
+                            //function (e) { alert("Error subiendo la foto " + e); });
                     }
                     , function () { alert("error"); }
                     , { destinationType: window.Camera.DestinationType.FILE_URI }
@@ -180,6 +180,35 @@ var app=
                     $(imgBut).addClass("btn-alert");
                 }
             });
+        },
+        
+        uploadFilePG: function (mediaFile) {
+            path = mediaFile.fullPath;
+            name = mediaFile.name;
+            
+            var options = new FileUploadOptions();
+            options.fileKey="file";
+            options.fileName=mediaFile.name;
+            //options.mimeType="image/jpeg";
+
+            var params = new Object();
+            params.fullpath = path;
+            params.name = name;
+
+            options.params = params;
+            options.chunkedMode = false;
+            
+            var ft = new FileTransfer();
+            ft.upload( path, app.SERVER_URL + "SaveFile",
+                function(result) {
+                    app.images[imgBut.id] = file.name;
+                    $(imgBut).addClass("btn-success");
+                },
+                function(error) {
+                    $(imgBut).addClass("btn-alert");
+                },
+                options
+                );
         }
     }
 
