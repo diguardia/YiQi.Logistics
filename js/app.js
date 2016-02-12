@@ -4,6 +4,8 @@ var app =
         SCHEMA_ID: 35, // SPF
         SERVER_URL: "http://me.yiqi.com.ar/",
         ENTITY_TALLY_ID: 861,
+        ID_CLIENTE: 5160,
+        ID_TIPO_UNIDAD: 5162,
 
         // Desa
         //SCHEMA_ID: 2,
@@ -58,15 +60,24 @@ var app =
             else { libs.callRPC({ url: "/api/accountapi/nop", callback: ok, errorCallback: noOk }); }
         },
 
-        loadStaticData: function () {
-            // Call RPC y después completar los combos de cliente y tipo de unidad
-            
-            //            $.each(paises, function () {
-            //                $("[name=PEDI_COUNTRY_CODE]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
-            //               $("[name=PEDI_MANUFACTURER_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
-            //                $("[name=PEDU_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
-            //                $("[name=PEDU_CONSIGNEE_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
-            //            });
+        loadStaticData: function (callback) {
+            libs.callRPC(
+                {
+                    url: "/api/entitiesApi/GetRootDropdowns",
+                    data: { id: app.ENTITY_TALLY_ID, schemaId: app.SCHEMA_ID },
+                    callback: function (data) {
+
+                        $.each(data[app.ID_CLIENTE], function () {
+                                        $("#tCliente").append("<option value='" + this.value + "'>" + this.text + "</option>");
+                                    });
+
+                        $.each(data[app.ID_TIPO_UNIDAD], function () {
+                            $("#tTipoDeUnidad").append("<option value='" + this.value + "'>" + this.text + "</option>");
+                        });
+                        callback();
+                    }
+                });
+
         },
 
         login: function () {
