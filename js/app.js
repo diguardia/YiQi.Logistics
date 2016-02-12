@@ -113,14 +113,14 @@ var app=
                         , entityName: "TALLY"
                         , json: JSON.stringify({
                             TALL_CHOFER: $("#tChofer").val(),
-                            TALL_CLIE_ID_CLIE: $("#tCliente").val(),
+                            CLIE_ID_CLIE: $("#tCliente").val(),
                             TALL_PUERTO: $("#tPuerto").val(),
                             TALL_FECHA_DE_RECEPCION: $("#tFechaRecepcion").val(),
                             TALL_NRO_DE_REMITO: $("#tRto").val(),
                             TALL_PRECINTOS: $("#tPrecintos").val(),
                             //TALL_TIUN_ID_TIUN: $("#tTipoDeUnidad").val(),
                             TALL_NRO_CONTENEDOR: $("#tNroContenedor").val(),
-                            TALL_CANT_BULTOS_SEGUN_RE: $("#tBultosSegunRTOPL").val(), // esto es una formula, hay que agregar un atributo nuevo?
+                            TALL_BULTOS_SEGUN_RTO: $("#tBultosSegunRTOPL").val(),
                             TALL_PATENTES: $("#tPatentes").val(),
                             //TALL_PALLETS: $("#tPallets").val()//esto tambien es una formula
                         })                        
