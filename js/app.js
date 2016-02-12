@@ -1,8 +1,8 @@
-var app=
+var app =
     {
         // Prod
         SCHEMA_ID: 35, // SPF
-        SERVER_URL: "http://me.yiqi.com.ar/", 
+        SERVER_URL: "http://me.yiqi.com.ar/",
         ENTITY_TALLY_ID: 861,
 
         // Desa
@@ -15,7 +15,7 @@ var app=
             if (app.checkToken(function () { app.showMain() }, function () { app.showLogin() }));
         },
 
-        showLogin:function () {
+        showLogin: function () {
             $("#divLogin").show();
             $("#divLinksHeaders").hide();
             $("#divMain").hide();
@@ -55,13 +55,13 @@ var app=
             else { libs.callRPC({ url: "/api/accountapi/nop", callback: ok, errorCallback: noOk }); }
         },
 
-        loadStaticData:function () {
-//            $.each(paises, function () {
-//                $("[name=PEDI_COUNTRY_CODE]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
-//               $("[name=PEDI_MANUFACTURER_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
-//                $("[name=PEDU_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
-//                $("[name=PEDU_CONSIGNEE_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
-//            });
+        loadStaticData: function () {
+            //            $.each(paises, function () {
+            //                $("[name=PEDI_COUNTRY_CODE]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
+            //               $("[name=PEDI_MANUFACTURER_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
+            //                $("[name=PEDU_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
+            //                $("[name=PEDU_CONSIGNEE_COUNTRY]").append("<option value='" + this.Code + "'>" + this.Name + "</option>");
+            //            });
         },
 
         login: function () {
@@ -123,11 +123,11 @@ var app=
                             TALL_BULTOS_SEGUN_RTO: $("#tBultosSegunRTOPL").val(),
                             TALL_PATENTES: $("#tPatentes").val(),
                             //TALL_PALLETS: $("#tPallets").val()//esto tambien es una formula
-                        })                        
-                         , jsonNewFiles: JSON.stringify(app.images)
+                        })
+                        , jsonNewFiles: JSON.stringify(app.images)
                         , jsonRemovedFiles: JSON.stringify([])
                     }
-                    , callback:function (c) { 
+                    , callback: function (c) {
                         if (c.ok) {
                             app.showMain("Tally subido con éxito");
                             $("#tChofer").val(""),
@@ -157,12 +157,12 @@ var app=
             try {
                 navigator.camera.getPicture(
                     function (fileURI) {
-                            app.uploadFilePG(fileURI, imgBut);
-                            // window.resolveLocalFileSystemURI(fileURI,
-                            //function (fileEntry) {
-                            //    fileEntry.file(function (f) {app.uploadFilePG(f, imgBut);}, function (e) {alert (e); } );
-                            //},
-                            //function (e) { alert("Error subiendo la foto " + e); });
+                        app.uploadFilePG(fileURI, imgBut);
+                        // window.resolveLocalFileSystemURI(fileURI,
+                        //function (fileEntry) {
+                        //    fileEntry.file(function (f) {app.uploadFilePG(f, imgBut);}, function (e) {alert (e); } );
+                        //},
+                        //function (e) { alert("Error subiendo la foto " + e); });
                     }
                     , function () { alert("error"); }
                     , { destinationType: window.Camera.DestinationType.FILE_URI }
@@ -192,11 +192,11 @@ var app=
                 }
             });
         },
-        
+
         uploadFilePG: function (imageURI, imgBut) {
-            var fileName = imageURI.substr(imageURI.lastIndexOf('/')+1);
+            var fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
             var options = new FileUploadOptions();
-            options.fileKey="file";
+            options.fileKey = "file";
             options.fileName = fileName;
             //options.mimeType="image/jpeg";
 
@@ -205,22 +205,22 @@ var app=
 
             options.params = params;
             options.chunkedMode = false;
-            
+
             var token = libs.getToken();
             var headers = {};
             if (token) {
                 headers.Authorization = 'Bearer ' + token;
             }
             options.headers = headers;
-            
+
             var ft = new FileTransfer();
-            ft.upload( imageURI, encodeURI(app.SERVER_URL + "api/instancesApi/SaveFile"),
-                function(result) {
+            ft.upload(imageURI, encodeURI(app.SERVER_URL + "api/instancesApi/SaveFile"),
+                function (result) {
                     app.images[imgBut.id] = fileName;
                     $(imgBut).addClass("btn-success");
                 },
-                function(error) {
-                    alert ("Error al subir el archivo");
+                function (error) {
+                    alert("Error al subir el archivo");
                     $(imgBut).addClass("btn-alert");
                 },
                 options
@@ -228,7 +228,7 @@ var app=
         }
     }
 
-$( function () {app.init(); });
+$(function () { app.init(); });
 
 function handleFiles(files) {
     var file = files[0];
