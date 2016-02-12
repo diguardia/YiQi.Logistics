@@ -146,7 +146,7 @@ var app=
             try {
                 navigator.camera.getPicture(
                     function (fileURI) {
-                            app.uploadFilePG(f, imgBut);
+                            app.uploadFilePG(fileURI, imgBut);
                             // window.resolveLocalFileSystemURI(fileURI,
                             //function (fileEntry) {
                             //    fileEntry.file(function (f) {app.uploadFilePG(f, imgBut);}, function (e) {alert (e); } );
