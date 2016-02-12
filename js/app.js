@@ -129,7 +129,18 @@ var app=
                     }
                     , callback:function (c) { 
                         if (c.ok) {
-                            app.showMain("Tally subido con éxito"); 
+                            app.showMain("Tally subido con éxito");
+                            $("#tChofer").val(""),
+                            $("#tCliente").val(""),
+                            $("#tPuerto").val(""),
+                            $("#tFechaRecepcion").val(""),
+                            $("#tRto").val(""),
+                            $("#tPrecintos").val(""),
+                            //$("#tTipoDeUnidad").val(),
+                            $("#tNroContenedor").val(""),
+                            $("#tBultosSegunRTOPL").val(""),
+                            $("#tPatentes").val("")
+                            //$("#tPallets").val()//esto tambien es una formula
                         } else {
                             $("#tallyError").text(c.error);
                             $("#tallyError").show();
