@@ -205,8 +205,15 @@ var app=
             options.params = params;
             options.chunkedMode = false;
             
+            var token = libs.getToken();
+            var headers = {};
+            if (token) {
+                headers.Authorization = 'Bearer ' + token;
+            }
+            options.headers = headers;
+            
             var ft = new FileTransfer();
-            ft.upload( imageURI, app.SERVER_URL + "SaveFile",
+            ft.upload( imageURI, encodeURI(app.SERVER_URL + "SaveFile"),
                 function(result) {
                     app.images[imgBut.id] = file.name;
                     $(imgBut).addClass("btn-success");
