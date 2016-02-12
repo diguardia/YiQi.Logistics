@@ -134,7 +134,7 @@ var app =
                             TALL_FECHA_DE_RECEPCION: $("#tFechaRecepcion").val(),
                             TALL_NRO_DE_REMITO: $("#tRto").val(),
                             TALL_PRECINTOS: $("#tPrecintos").val(),
-                            //TALL_TIUN_ID_TIUN: $("#tTipoDeUnidad").val(),
+                            TIUN_ID_TIUN: $("#tTipoDeUnidad").val(),
                             TALL_NRO_CONTENEDOR: $("#tNroContenedor").val(),
                             TALL_BULTOS_SEGUN_RTO: $("#tBultosSegunRTOPL").val(),
                             TALL_PATENTES: $("#tPatentes").val(),
@@ -152,13 +152,14 @@ var app =
                             $("#tFechaRecepcion").val(""),
                             $("#tRto").val(""),
                             $("#tPrecintos").val(""),
-                            //$("#tTipoDeUnidad").val(),
+                            $("#tTipoDeUnidad").val(""),
                             $("#tNroContenedor").val(""),
                             $("#tBultosSegunRTOPL").val(""),
                             $("#tPatentes").val("")
                             //$("#tPallets").val()//esto tambien es una formula
                         } else {
-                            $("#tallyError").text(c.error);
+
+                            $("#tallyError").html(c.error.replace(/\n/g, "<br>"));
                             $("#tallyError").show();
                         }
                     }
