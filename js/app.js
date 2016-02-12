@@ -213,12 +213,13 @@ var app=
             options.headers = headers;
             
             var ft = new FileTransfer();
-            ft.upload( imageURI, encodeURI(app.SERVER_URL + "SaveFile"),
+            ft.upload( imageURI, encodeURI(app.SERVER_URL + "api/instancesApi/SaveFile"),
                 function(result) {
                     app.images[imgBut.id] = file.name;
                     $(imgBut).addClass("btn-success");
                 },
                 function(error) {
+                    alert ("Error al subir el archivo");
                     $(imgBut).addClass("btn-alert");
                 },
                 options
