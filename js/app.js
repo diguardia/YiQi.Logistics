@@ -165,13 +165,18 @@ var app =
                             $("#tNroContenedor").val("");
                             $("#tBultosSegunRTOPL").val("");
                             $("#tPatentes").val("");
-                            $("#TALL_FILE_1").addClass("form-control");
-                            $("#TALL_FILE_2").addClass("form-control");
-                            $("#TALL_FILE_3").addClass("form-control");
-                            $("#TALL_FILE_4").addClass("form-control");
-                            $("#TALL_FILE_5").addClass("form-control");
-                            $("#TALL_FILE_6").addClass("form-control");
-                            $("#TALL_FILE_7").addClass("form-control");
+                            $("#TALL_FILE_1").addClass("btn-default");
+                            $("#TALL_FILE_2").addClass("btn-default");
+                            $("#TALL_FILE_3").addClass("btn-default");
+                            $("#TALL_FILE_4").addClass("btn-default");
+                            $("#TALL_FILE_5").addClass("btn-default");
+                            $("#TALL_FILE_6").addClass("btn-default");
+                            $("#TALL_FILE_7").addClass("btn-default");
+                            $("#TALL_FILE_8Obs").val("");
+                            $("#TALL_FILE_9Obs").val("");
+                            $("#TALL_FILE_10Obs").val("");
+                            $("#TALL_FILE_11Obs").val("");
+                            $("#TALL_FILE_12Obs").val("");
                             //$("#tPallets").val()//esto tambien es una formula
                         } else {
 
