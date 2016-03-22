@@ -124,76 +124,86 @@ var app =
         submitTally: function () {
             $("#tallyError").hide();
             
-            alert($("#TALL_FILE_1").attr('class'));
-            app.showMain("attr( class): " + $("#TALL_FILE_1").attr("class"));
-            app.showMain(' $("#TALL_FILE_1").hasClass("btn-success"): ' + $("#TALL_FILE_1").hasClass("btn-success"));
-            libs.callRPC(
-                {
-                    url: "api/instancesapi/SaveInstanceFull"
-                    , data: {
-                        schemaId: app.SCHEMA_ID
-                        , entityName: "TALLY"
-                        , json: JSON.stringify({
-                            TALL_CHOFER: $("#tChofer").val(),
-                            CLIE_ID_CLIE: $("#tCliente").val(),
-                            TALL_PUERTO: $("#tPuerto").val(),
-                            TALL_FECHA_DE_RECEPCION: $("#tFechaRecepcion").val(),
-                            TALL_NRO_DE_REMITO: $("#tRto").val(),
-                            TALL_PRECINTOS: $("#tPrecintos").val(),
-                            TIUN_ID_TIUN: $("#tTipoDeUnidad").val(),
-                            TALL_NRO_CONTENEDOR: $("#tNroContenedor").val(),
-                            TALL_BULTOS_SEGUN_RTO: $("#tBultosSegunRTOPL").val(),
-                            TALL_PATENTES: $("#tPatentes").val(),
-                            TALL_OBSERVACION_1: $("#TALL_FILE_8Obs").val(),
-                            TALL_OBSERVACION_2: $("#TALL_FILE_9Obs").val(),
-                            TALL_OBSERVACION_3: $("#TALL_FILE_10Obs").val(),
-                            TALL_OBSERVACION_4: $("#TALL_FILE_11Obs").val(),
-                            TALL_OBSERVACION_5: $("#TALL_FILE_12Obs").val()
-                            //TALL_PALLETS: $("#tPallets").val()//esto tambien es una formula
-                        })
-                        , jsonNewFiles: JSON.stringify(app.images)
-                        , jsonRemovedFiles: JSON.stringify([])
-                    }
-                    , callback: function (c) {
-                        if (c.ok) {
-                            app.showMain("Tally subido con éxito");
+            if ($("#TALL_FILE_1").hasClass("btn-success") && $("#TALL_FILE_2").hasClass("btn-success") && $("#TALL_FILE_3").hasClass("btn-success") && $("#TALL_FILE_4").hasClass("btn-success") && $("#TALL_FILE_5").hasClass("btn-success") && $("#TALL_FILE_6").hasClass("btn-success") && $("#TALL_FILE_7").hasClass("btn-success")) {
 
-                            $("#tChofer").val("");
-                            $("#tCliente").val("");
-                            $("#tPuerto").val("");
-                            var date=new Date();
-                            $("#tFechaRecepcion").val(date.toISOString().split('T')[0]);
-                            
-                            $("#tRto").val("");
-                            $("#tPrecintos").val("");
-                            $("#tTipoDeUnidad").val("");
-                            $("#tNroContenedor").val("");
-                            $("#tBultosSegunRTOPL").val("");
-                            $("#tPatentes").val("");
-                            $("#TALL_FILE_1").addClass("btn-default");
-                            $("#TALL_FILE_2").addClass("btn-default");
-                            $("#TALL_FILE_3").addClass("btn-default");
-                            $("#TALL_FILE_4").addClass("btn-default");
-                            $("#TALL_FILE_5").addClass("btn-default");
-                            $("#TALL_FILE_6").addClass("btn-default");
-                            $("#TALL_FILE_7").addClass("btn-default");
-                            $("#TALL_FILE_8Obs").val("");
-                            $("#TALL_FILE_9Obs").val("");
-                            $("#TALL_FILE_10Obs").val("");
-                            $("#TALL_FILE_11Obs").val("");
-                            $("#TALL_FILE_12Obs").val("");
-                            //$("#tPallets").val()//esto tambien es una formula
-                        } else {
+                libs.callRPC(
+                    {
+                        url: "api/instancesapi/SaveInstanceFull"
+                        , data: {
+                            schemaId: app.SCHEMA_ID
+                            , entityName: "TALLY"
+                            , json: JSON.stringify({
+                                TALL_CHOFER: $("#tChofer").val(),
+                                CLIE_ID_CLIE: $("#tCliente").val(),
+                                TALL_PUERTO: $("#tPuerto").val(),
+                                TALL_FECHA_DE_RECEPCION: $("#tFechaRecepcion").val(),
+                                TALL_NRO_DE_REMITO: $("#tRto").val(),
+                                TALL_PRECINTOS: $("#tPrecintos").val(),
+                                TIUN_ID_TIUN: $("#tTipoDeUnidad").val(),
+                                TALL_NRO_CONTENEDOR: $("#tNroContenedor").val(),
+                                TALL_BULTOS_SEGUN_RTO: $("#tBultosSegunRTOPL").val(),
+                                TALL_PATENTES: $("#tPatentes").val(),
+                                TALL_OBSERVACION_1: $("#TALL_FILE_8Obs").val(),
+                                TALL_OBSERVACION_2: $("#TALL_FILE_9Obs").val(),
+                                TALL_OBSERVACION_3: $("#TALL_FILE_10Obs").val(),
+                                TALL_OBSERVACION_4: $("#TALL_FILE_11Obs").val(),
+                                TALL_OBSERVACION_5: $("#TALL_FILE_12Obs").val()
+                                //TALL_PALLETS: $("#tPallets").val()//esto tambien es una formula
+                            })
+                            , jsonNewFiles: JSON.stringify(app.images)
+                            , jsonRemovedFiles: JSON.stringify([])
+                        }
+                        , callback: function (c) {
+                            if (c.ok) {
+                                app.showMain("Tally subido con éxito");
 
-                            $("#tallyError").html(c.error.replace(/\n/g, "<br>"));
+                                $("#tChofer").val("");
+                                $("#tCliente").val("");
+                                $("#tPuerto").val("");
+                                var date = new Date();
+                                $("#tFechaRecepcion").val(date.toISOString().split('T')[0]);
+
+                                $("#tRto").val("");
+                                $("#tPrecintos").val("");
+                                $("#tTipoDeUnidad").val("");
+                                $("#tNroContenedor").val("");
+                                $("#tBultosSegunRTOPL").val("");
+                                $("#tPatentes").val("");
+                                $("#TALL_FILE_1").addClass("btn-default");
+                                $("#TALL_FILE_1").removeClass("btn-success");
+                                $("#TALL_FILE_2").addClass("btn-default");
+                                $("#TALL_FILE_2").removeClass("btn-success");
+                                $("#TALL_FILE_3").addClass("btn-default");
+                                $("#TALL_FILE_3").removeClass("btn-success");
+                                $("#TALL_FILE_4").addClass("btn-default");
+                                $("#TALL_FILE_4").removeClass("btn-success");
+                                $("#TALL_FILE_5").addClass("btn-default");
+                                $("#TALL_FILE_5").removeClass("btn-success");
+                                $("#TALL_FILE_6").addClass("btn-default");
+                                $("#TALL_FILE_6").removeClass("btn-success");
+                                $("#TALL_FILE_7").addClass("btn-default");
+                                $("#TALL_FILE_7").removeClass("btn-success");
+                                $("#TALL_FILE_8Obs").val("");
+                                $("#TALL_FILE_9Obs").val("");
+                                $("#TALL_FILE_10Obs").val("");
+                                $("#TALL_FILE_11Obs").val("");
+                                $("#TALL_FILE_12Obs").val("");
+                                //$("#tPallets").val()//esto tambien es una formula
+                            } else {
+
+                                $("#tallyError").html(c.error.replace(/\n/g, "<br>"));
+                                $("#tallyError").show();
+                            }
+                        }
+                        , errorCallback: function (e) {
+                            $("#tallyError").text("Error al subir el tally " + e);
                             $("#tallyError").show();
                         }
-                    }
-                    , errorCallback: function (e) {
-                        $("#tallyError").text("Error al subir el tally " + e);
-                        $("#tallyError").show();
-                    }
-                });
+                    });
+            } else {
+                $("#tallyError").text("Las imágenes: Camión Cerrado, Precinto, Abierto antes de atracar,  Al  80%, Al 50%, Vacio y Remito son obligatorios");
+                $("#tallyError").show();
+            }
         },
 
         capturePhoto: function (imgBut) {
