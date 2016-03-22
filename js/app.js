@@ -238,6 +238,7 @@ var app =
                 post: true,
                 callback: function (data) {
                     app.images[imgBut.id] = file.name;
+
                     $(imgBut).addClass("btn-success");
                 },
                 errorCallback: function (error) {
@@ -270,6 +271,9 @@ var app =
             ft.upload(imageURI, encodeURI(app.SERVER_URL + "api/instancesApi/SaveFile"),
                 function (result) {
                     app.images[imgBut.id] = fileName;
+                    if ($(imgBut).hasClass("btn-default")) {
+                        $(imgBut).removeClass("btn-default");
+                    }
                     $(imgBut).addClass("btn-success");
                 },
                 function (error) {
