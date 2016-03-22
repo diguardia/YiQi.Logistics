@@ -123,6 +123,10 @@ var app =
 
         submitTally: function () {
             $("#tallyError").hide();
+            
+            alert($("#TALL_FILE_1").attr('class'));
+            app.showMain("attr( class): " + $("#TALL_FILE_1").attr("class"));
+            app.showMain(' $("#TALL_FILE_1").hasClass("btn-success"): ' + $("#TALL_FILE_1").hasClass("btn-success"));
             libs.callRPC(
                 {
                     url: "api/instancesapi/SaveInstanceFull"
@@ -153,6 +157,7 @@ var app =
                     , callback: function (c) {
                         if (c.ok) {
                             app.showMain("Tally subido con éxito");
+
                             $("#tChofer").val("");
                             $("#tCliente").val("");
                             $("#tPuerto").val("");
