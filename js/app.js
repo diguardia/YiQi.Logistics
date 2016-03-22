@@ -125,7 +125,7 @@ var app =
             $("#tallyError").hide();
             
             if ($("#TALL_FILE_1").hasClass("btn-success") && $("#TALL_FILE_2").hasClass("btn-success") && $("#TALL_FILE_3").hasClass("btn-success") && $("#TALL_FILE_4").hasClass("btn-success") && $("#TALL_FILE_5").hasClass("btn-success") && $("#TALL_FILE_6").hasClass("btn-success") && $("#TALL_FILE_7").hasClass("btn-success")) {
-
+                $('#loading').show();
                 libs.callRPC(
                     {
                         url: "api/instancesapi/SaveInstanceFull"
@@ -189,17 +189,20 @@ var app =
                                 $("#TALL_FILE_11Obs").val("");
                                 $("#TALL_FILE_12Obs").val("");
                                 //$("#tPallets").val()//esto tambien es una formula
+                                $('#loading').hide();
                             } else {
-
+                                $('#loading').hide();
                                 $("#tallyError").html(c.error.replace(/\n/g, "<br>"));
                                 $("#tallyError").show();
                             }
                         }
                         , errorCallback: function (e) {
+                            $('#loading').hide();
                             $("#tallyError").text("Error al subir el tally " + e);
                             $("#tallyError").show();
                         }
                     });
+
             } else {
                 $("#tallyError").text("Las imágenes: Camión Cerrado, Precinto, Abierto antes de atracar,  Al  80%, Al 50%, Vacio y Remito son obligatorios");
                 $("#tallyError").show();
