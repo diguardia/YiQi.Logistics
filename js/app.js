@@ -190,6 +190,8 @@ var app =
                                 $("#TALL_FILE_11Obs").val("");
                                 $("#TALL_FILE_12Obs").val("");
                                 //$("#tPallets").val()//esto tambien es una formula
+                                $("#loadinguUpload").show();
+                                $("#uploading").hide();
  
                             } else {
 
