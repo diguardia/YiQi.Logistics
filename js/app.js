@@ -190,31 +190,31 @@ var app =
                                 $("#TALL_FILE_11Obs").val("");
                                 $("#TALL_FILE_12Obs").val("");
                                 //$("#tPallets").val()//esto tambien es una formula
-                                $("#loadinguUpload").show();
-                                $("#uploading").hide();
+                                $("#uploading").show();
+                                $("#loadinguUpload").hide();
  
                             } else {
 
                                 $("#tallyError").html(c.error.replace(/\n/g, "<br>"));
                                 $("#tallyError").show();
-                                $("#loadinguUpload").show();
-                                $("#uploading").hide();
+                                $("#uploading").show();
+                                $("#loadinguUpload").hide();
                             }
                         }
                         , errorCallback: function (e) {
 
                             $("#tallyError").text("Error al subir el tally " + e);
                             $("#tallyError").show();
-                            $("#loadinguUpload").show();
-                            $("#uploading").hide();
+                            $("#uploading").show();
+                            $("#loadinguUpload").hide();
                         }
                     });
 
             } else {
                 $("#tallyError").text("Las imágenes: Camión Cerrado, Precinto, Abierto antes de atracar,  Al  80%, Al 50%, Vacio y Remito son obligatorios");
                 $("#tallyError").show();
-                $("#loadinguUpload").show();
-                $("#uploading").hide();
+                $("#uploading").show();
+                $("#loadinguUpload").hide();
             }
         },
 
