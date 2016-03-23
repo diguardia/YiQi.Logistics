@@ -211,6 +211,8 @@ var app =
             } else {
                 $("#tallyError").text("Las imágenes: Camión Cerrado, Precinto, Abierto antes de atracar,  Al  80%, Al 50%, Vacio y Remito son obligatorios");
                 $("#tallyError").show();
+                $("#loadinguUpload").show();
+                $("#uploading").hide();
             }
         },
 
