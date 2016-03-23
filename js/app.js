@@ -123,7 +123,8 @@ var app =
 
         submitTally: function () {
             $("#tallyError").hide();
-            
+            $("#uploading").hide();
+            $("#loadinguUpload").show();
             if ($("#TALL_FILE_1").hasClass("btn-success") && $("#TALL_FILE_2").hasClass("btn-success") && $("#TALL_FILE_3").hasClass("btn-success") && $("#TALL_FILE_4").hasClass("btn-success") && $("#TALL_FILE_5").hasClass("btn-success") && $("#TALL_FILE_6").hasClass("btn-success") && $("#TALL_FILE_7").hasClass("btn-success")) {
                
                 libs.callRPC(
@@ -139,7 +140,7 @@ var app =
                                 TALL_FECHA_DE_RECEPCION: $("#tFechaRecepcion").val(),
                                 TALL_NRO_DE_REMITO: $("#tRto").val(),
                                 TALL_PRECINTOS: $("#tPrecintos").val(),
-                                TIUN_ID_TIUN: $("#tTipoDeUnidad").val(),
+                                TALL_TIPO_DE_VEHICULO: $("#tTipoDeVehiculo").val(),
                                 TALL_NRO_CONTENEDOR: $("#tNroContenedor").val(),
                                 TALL_BULTOS_SEGUN_RTO: $("#tBultosSegunRTOPL").val(),
                                 TALL_PATENTES: $("#tPatentes").val(),
@@ -165,7 +166,7 @@ var app =
 
                                 $("#tRto").val("");
                                 $("#tPrecintos").val("");
-                                $("#tTipoDeUnidad").val("");
+                                $("#tTipoDeVehiculo").val("");
                                 $("#tNroContenedor").val("");
                                 $("#tBultosSegunRTOPL").val("");
                                 $("#tPatentes").val("");
@@ -194,12 +195,16 @@ var app =
 
                                 $("#tallyError").html(c.error.replace(/\n/g, "<br>"));
                                 $("#tallyError").show();
+                                $("#loadinguUpload").show();
+                                $("#uploading").hide();
                             }
                         }
                         , errorCallback: function (e) {
 
                             $("#tallyError").text("Error al subir el tally " + e);
                             $("#tallyError").show();
+                            $("#loadinguUpload").show();
+                            $("#uploading").hide();
                         }
                     });
 
