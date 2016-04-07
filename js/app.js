@@ -12,6 +12,8 @@ var app =
         //SERVER_URL: "http://localhost:5001/", 
         //ENTITY_TALLY_ID: 64,
 
+        formStart: null, // Hora que empieza la carga del formulario
+        
         init: function () { 
             if (app.checkToken(function () { app.showMain() }, function () { app.showLogin() }));
         },
@@ -54,8 +56,18 @@ var app =
             $("#divMain").hide();
             $("#divTally").show();
             $("#tallyError").hide();
+            app.formStart = new Date(); 
+            
         },
 
+        showHideNroContenedor: function () {
+            if ($("#tTipoDeVehiculo").val().startsWith("Contenedor")) {
+                $("#tNroContenedor").show();    
+            } else {
+                $("#tNroContenedor").hide();
+            }
+        },
+        
         checkToken: function (ok, noOk) {
             var token = libs.getToken();
             if (!token) { noOk(); }// No tenía token
@@ -63,6 +75,7 @@ var app =
         },
 
         loadStaticData: function (callback) {
+            $("#divSincronizing").show();
             libs.callRPC(
                 {
                     url: "/api/entitiesApi/GetRootDropdowns",
@@ -76,7 +89,9 @@ var app =
                         $.each(data[app.ID_TIPO_UNIDAD], function () {
                             $("#tTipoDeUnidad").append("<option value='" + this.value + "'>" + this.text + "</option>");
                         });
+                        $("#divSincronizing").hide();
                         callback();
+
                     }
                 });
 
@@ -148,7 +163,9 @@ var app =
                                 TALL_OBSERVACION_2: $("#TALL_FILE_9Obs").val(),
                                 TALL_OBSERVACION_3: $("#TALL_FILE_10Obs").val(),
                                 TALL_OBSERVACION_4: $("#TALL_FILE_11Obs").val(),
-                                TALL_OBSERVACION_5: $("#TALL_FILE_12Obs").val()
+                                TALL_OBSERVACION_5: $("#TALL_FILE_12Obs").val(),
+                                TALL_INICIO_DE_DESCARGA: app.formStart,
+                                TALL_FINALIZACION_DE_DESC: new Date()
                                 //TALL_PALLETS: $("#tPallets").val()//esto tambien es una formula
                             })
                             , jsonNewFiles: JSON.stringify(app.images)
@@ -192,7 +209,7 @@ var app =
                                 //$("#tPallets").val()//esto tambien es una formula
                                 $("#uploading").show();
                                 $("#loadinguUpload").hide();
- 
+                                app.showHideNroContenedor();
                             } else {
 
                                 $("#tallyError").html(c.error.replace(/\n/g, "<br>"));
@@ -219,6 +236,8 @@ var app =
         },
 
         capturePhoto: function (imgBut) {
+            $(imgBut).addClass("btn-warning");
+
             try {
                 navigator.camera.getPicture(
                     function (fileURI) {
@@ -250,10 +269,12 @@ var app =
                 post: true,
                 callback: function (data) {
                     app.images[imgBut.id] = file.name;
+                    imgBut.removeClass("btn-warning");
 
                     $(imgBut).addClass("btn-success");
                 },
                 errorCallback: function (error) {
+                    imgBut.removeClass("btn-warning");
                     $(imgBut).addClass("btn-alert");
                 }
             });

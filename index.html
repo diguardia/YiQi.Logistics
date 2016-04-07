@@ -68,7 +68,7 @@
                 <nav>
                     <ul class="nav nav-pills pull-right" id="divLinksHeaders">
                         <li role="presentation">
-                            <a href="#" onclick="app.logout();">Log Out</a>
+                            <a href="#" onclick="app.logout();" style="color:white" >Log Out</a>
                         </li>
                     </ul>
                 </nav>
@@ -110,6 +110,8 @@
             </div>
             <div class="col-md-6"></div>
         </div>
+
+        <button id="divSincronizing" class="btn btn-lg btn-warning" style="display:none"><span class="glyphicon glyphicon-refresh spinning"></span> Actualizando datos...</button>
 
         <div id="divMain" style="display:none">
             <div class="row">
@@ -155,7 +157,15 @@
                     <input type="number" class="form-control" id="tPrecintos" placeholder="Precintos" required>
                 </div>
                 <div class="form-group">
-                    <input type="name" class="form-control" id="tTipoDeVehiculo" placeholder="Tipo de unidad" required></input>
+                    <select class="form-control" id="tTipoDeVehiculo" placeholder="Tipo de unidad" required onchange="app.showHideNroContenedor()">
+                        <option>Contenedores 20</option>
+                        <option>Contenedores 40</option>
+                        <option>Contenedores HC</option>
+                        <option>Semi</option>
+                        <option>Chasis</option>
+                        <option>Camioneta</option>
+                        <option>Otros</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <input type="number" class="form-control" id="tNroContenedor" placeholder="Nro Contenedor" required>
