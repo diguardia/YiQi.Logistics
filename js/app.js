@@ -61,7 +61,7 @@ var app =
         },
 
         showHideNroContenedor: function () {
-            if ($("#tTipoDeVehiculo").val().startsWith("Contenedor")) {
+            if ($("#tTipoDeVehiculo").val().indexOf("Contenedor")==0) {
                 $("#tNroContenedor").show();    
             } else {
                 $("#tNroContenedor").hide();
@@ -255,6 +255,7 @@ var app =
             catch (ex) { alert(ex); }
         },
 
+        // Método que puede servir para probarlo en el escritorio
         uploadFile: function (file, imgBut) {
             var data = new FormData();
             data.append('file-0', file);
@@ -269,12 +270,12 @@ var app =
                 post: true,
                 callback: function (data) {
                     app.images[imgBut.id] = file.name;
-                    imgBut.removeClass("btn-warning");
+                    $(imgBut).removeClass("btn-warning");
 
                     $(imgBut).addClass("btn-success");
                 },
                 errorCallback: function (error) {
-                    imgBut.removeClass("btn-warning");
+                    $(imgBut).removeClass("btn-warning");
                     $(imgBut).addClass("btn-alert");
                 }
             });
@@ -308,10 +309,13 @@ var app =
                         $(imgBut).removeClass("btn-default");
                     }
                     $(imgBut).addClass("btn-success");
+                    $(imgBut).removeClass("btn-warning");
+
                 },
                 function (error) {
                     alert("Error al subir el archivo");
                     $(imgBut).addClass("btn-alert");
+                    $(imgBut).removeClass("btn-warning");
                 },
                 options
                 );
