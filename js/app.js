@@ -49,6 +49,7 @@ var app =
             } else {
                 $("#mainMsg").hide();
             }
+            $("#labelTime").text(app.formatTime(new Date()));
             app.images = {};
         },
 
@@ -262,7 +263,7 @@ var app =
         },
 
         formatTime: function(d) {
-            return d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+            return d.getHours() + ":" + d.getMinutes();
         },
 
         // Método que puede servir para probarlo en el escritorio
