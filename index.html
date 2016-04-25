@@ -24,32 +24,30 @@
         body {
             font-family: 'Lato', serif;
         }
-
+        
         .glyphicon.spinning {
             animation: spin 1s infinite linear;
             -webkit-animation: spin2 1s infinite linear;
         }
-
+        
         @keyframes spin {
             from {
                 transform: scale(1) rotate(0deg);
             }
-
             to {
                 transform: scale(1) rotate(360deg);
             }
         }
-
+        
         @-webkit-keyframes spin2 {
             from {
                 -webkit-transform: rotate(0deg);
             }
-
             to {
                 -webkit-transform: rotate(360deg);
             }
         }
-
+        
         #loading {
             position: absolute;
             width: 100%;
@@ -68,7 +66,7 @@
                 <nav>
                     <ul class="nav nav-pills pull-right" id="divLinksHeaders">
                         <li role="presentation">
-                            <a href="#" onclick="app.logout();" style="color:white" >Log Out</a>
+                            <a href="#" onclick="app.logout();" style="color:white">Log Out</a>
                         </li>
                     </ul>
                 </nav>
@@ -117,8 +115,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="page-header">
-                        <h1>Menú principal</h1>
-                                            Hora del dispositivo: <span id="labelTime"></span>
+                        <h1>Menú principal</h1> Hora del dispositivo: <span id="labelTime"></span>
 
                     </div>
                 </div>
@@ -184,50 +181,53 @@
                 <!--<div class="form-group">
                     <input type="number" class="form-control" id="tPallets" placeholder="Pallets" required>
                 </div>-->
-                <H2>Imágenes</H2>
-                <div class="form-group">
-                    <input type="button" class="form-control" id="TALL_FILE_1" value="Camión Cerrado" required onclick="app.capturePhoto(this)">
-                    <!--<input type="file" onchange="handleFiles(this.files)" />-->
+                <button type="button" id="butUploadTallyHeader" class="btn btn-default" onclick="app.uploadTallyHeader();">Cargar cabecera</button>
+                <div id="divTallyImages">
+                    <H2>Imágenes</H2>
+                    <div class="form-group">
+                        <input type="button" class="form-control" id="TALL_FILE_1" value="Camión Cerrado" required onclick="app.capturePhoto(this)">
+                        <!--<input type="file" onchange="handleFiles(this.files)" />-->
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="form-control" id="TALL_FILE_2" value="Precinto" required onclick="app.capturePhoto(this)">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="form-control" id="TALL_FILE_3" value="Abierto antes de atracar" required onclick="app.capturePhoto(this)">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="form-control" id="TALL_FILE_4" value="Al 80%" required onclick="app.capturePhoto(this)">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="form-control" id="TALL_FILE_5" value="Al 50%" required onclick="app.capturePhoto(this)">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="form-control" id="TALL_FILE_6" value="Vacío" required onclick="app.capturePhoto(this)">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="form-control" id="TALL_FILE_7" value="Remito" required onclick="app.capturePhoto(this)">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="form-control" id="TALL_FILE_8" value="Anomalía 1" required onclick="app.capturePhoto(this)">
+                        <input type="name" class="form-control" id="TALL_FILE_8Obs" placeholder="Observaciones">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="form-control" id="TALL_FILE_9" value="Anomalía 2" required onclick="app.capturePhoto(this)">
+                        <input type="name" class="form-control" id="TALL_FILE_9Obs" placeholder="Observaciones">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="form-control" id="TALL_FILE_10" value="Anomalía 3" required onclick="app.capturePhoto(this)">
+                        <input type="name" class="form-control" id="TALL_FILE_10Obs" placeholder="Observaciones">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="form-control" id="TALL_FILE_11" value="Anomalía 4" required onclick="app.capturePhoto(this)">
+                        <input type="name" class="form-control" id="TALL_FILE_11Obs" placeholder="Observaciones">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="form-control" id="TALL_FILE_12" value="Anomalía 5" required onclick="app.capturePhoto(this)">
+                        <input type="name" class="form-control" id="TALL_FILE_12Obs" placeholder="Observaciones">
+                    </div>
+                    <button type="button" id="uploading" class="btn btn-default" onclick="app.submitTally();">Subir Tally</button>
                 </div>
-                <div class="form-group">
-                    <input type="button" class="form-control" id="TALL_FILE_2" value="Precinto" required onclick="app.capturePhoto(this)">
-                </div>
-                <div class="form-group">
-                    <input type="button" class="form-control" id="TALL_FILE_3" value="Abierto antes de atracar" required onclick="app.capturePhoto(this)">
-                </div>
-                <div class="form-group">
-                    <input type="button" class="form-control" id="TALL_FILE_4" value="Al 80%" required onclick="app.capturePhoto(this)">
-                </div>
-                <div class="form-group">
-                    <input type="button" class="form-control" id="TALL_FILE_5" value="Al 50%" required onclick="app.capturePhoto(this)">
-                </div>
-                <div class="form-group">
-                    <input type="button" class="form-control" id="TALL_FILE_6" value="Vacío" required onclick="app.capturePhoto(this)">
-                </div>
-                <div class="form-group">
-                    <input type="button" class="form-control" id="TALL_FILE_7" value="Remito" required onclick="app.capturePhoto(this)">
-                </div>
-                <div class="form-group">
-                    <input type="button" class="form-control" id="TALL_FILE_8" value="Anomalía 1" required onclick="app.capturePhoto(this)">
-                    <input type="name" class="form-control" id="TALL_FILE_8Obs" placeholder="Observaciones">
-                </div>
-                <div class="form-group">
-                    <input type="button" class="form-control" id="TALL_FILE_9" value="Anomalía 2" required onclick="app.capturePhoto(this)">
-                    <input type="name" class="form-control" id="TALL_FILE_9Obs" placeholder="Observaciones">
-                </div>
-                <div class="form-group">
-                    <input type="button" class="form-control" id="TALL_FILE_10" value="Anomalía 3" required onclick="app.capturePhoto(this)">
-                    <input type="name" class="form-control" id="TALL_FILE_10Obs" placeholder="Observaciones">
-                </div>
-                <div class="form-group">
-                    <input type="button" class="form-control" id="TALL_FILE_11" value="Anomalía 4" required onclick="app.capturePhoto(this)">
-                    <input type="name" class="form-control" id="TALL_FILE_11Obs" placeholder="Observaciones">
-                </div>
-                <div class="form-group">
-                    <input type="button" class="form-control" id="TALL_FILE_12" value="Anomalía 5" required onclick="app.capturePhoto(this)">
-                    <input type="name" class="form-control" id="TALL_FILE_12Obs" placeholder="Observaciones">
-                </div>
-                <button type="button" id="uploading" class="btn btn-default" onclick="app.submitTally();">Subir Tally</button>
                 <button id="loadinguUpload" class="btn btn-lg btn-warning" style="display:none"><span class="glyphicon glyphicon-refresh spinning"></span> Subiendo...</button>
                 <br />
                 <div id="tallyError" class="alerta"> </div>
@@ -235,7 +235,7 @@
             </form>
         </div>
     </div>
-    
+
     <!-- container principal ENDS) -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
