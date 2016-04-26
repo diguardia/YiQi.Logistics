@@ -213,6 +213,13 @@ var app =
                 TALL_OBSERVACION_3: $("#TALL_FILE_10Obs").val(),
                 TALL_OBSERVACION_4: $("#TALL_FILE_11Obs").val(),
                 TALL_OBSERVACION_5: $("#TALL_FILE_12Obs").val(),
+                TALL_OBSERVACION_6: $("#TALL_FILE_13Obs").val(),
+                TALL_OBSERVACION_7: $("#TALL_FILE_14Obs").val(),
+                TALL_OBSERVACION_8: $("#TALL_FILE_15Obs").val(),
+                TALL_OBSERVACION_9: $("#TALL_FILE_16Obs").val(),
+                TALL_OBSERVACION_10: $("#TALL_FILE_17Obs").val(),
+                TALL_OBSERVACION_11: $("#TALL_FILE_18Obs").val(),
+                TALL_OBSERVACION_12: $("#TALL_FILE_19Obs").val(),                
                 TALL_INICIO_DE_DESCARGA: app.formatTime(app.formStart),
                 TALL_FINALIZACION_DE_DESC: app.formatTime(new Date())
             };
