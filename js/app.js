@@ -12,7 +12,7 @@ var app =
         //SERVER_URL: "http://localhost:5001/", 
         //ENTITY_TALLY_ID: 64,
 
-        FILE_COUNT: 12,
+        FILE_COUNT: 19,
         formStart: null, // Hora que empieza la carga del formulario
 
         init: function () {
@@ -263,7 +263,7 @@ var app =
         formatTime: function (d) {
             return d.getHours() + ":" + d.getMinutes();
         },
-
+/*
         // Método que puede servir para probarlo en el escritorio
         uploadFile: function (file, imgBut) {
             var data = new FormData();
@@ -291,7 +291,7 @@ var app =
                 }
             });
         },
-
+*/
         uploadFilePG: function (imageURI, imgBut) {
             var fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
             var options = new FileUploadOptions();
@@ -319,9 +319,11 @@ var app =
                     if ($(imgBut).hasClass("btn-default")) {
                         $(imgBut).removeClass("btn-default");
                     }
-                    $(imgBut).addClass("btn-success");
-                    $(imgBut).removeClass("btn-warning");
-
+                    app.uploadTally(function () {
+                        $(imgBut).addClass("btn-success");
+                        $(imgBut).removeClass("btn-warning");
+                        delete app.images[imgBut.id];
+                    });
                 },
                 function (error) {
                     alert("Error al subir el archivo");
