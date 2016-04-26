@@ -14,6 +14,7 @@ var app =
 
         FILE_COUNT: 19,
         formStart: null, // Hora que empieza la carga del formulario
+        currentTallyId: null, // id del tally utilizado para las subidas parciales
 
         init: function () {
             if (app.checkToken(function () { app.showMain() }, function () { app.showLogin() }));
@@ -141,6 +142,7 @@ var app =
         },
 
         uploadTallyHeader: function () {
+            app.currentTallyId = null;
             app.uploadTally(function (c) {
                 $("#divTallyImages").show();
                 $("#butUploadTallyHeader").hide();
@@ -198,6 +200,7 @@ var app =
             $("#tallyError").hide();
             $("#loadinguUpload").show();
             var tally = {
+                id: app.currentTallyId,
                 TALL_CHOFER: $("#tChofer").val(),
                 CLIE_ID_CLIE: $("#tCliente").val(),
                 TALL_PUERTO: $("#tPuerto").val(),
@@ -219,7 +222,7 @@ var app =
                 TALL_OBSERVACION_9: $("#TALL_FILE_16Obs").val(),
                 TALL_OBSERVACION_10: $("#TALL_FILE_17Obs").val(),
                 TALL_OBSERVACION_11: $("#TALL_FILE_18Obs").val(),
-                TALL_OBSERVACION_12: $("#TALL_FILE_19Obs").val(),                
+                TALL_OBSERVACION_12: $("#TALL_FILE_19Obs").val(),
                 TALL_INICIO_DE_DESCARGA: app.formatTime(app.formStart),
                 TALL_FINALIZACION_DE_DESC: app.formatTime(new Date())
             };
@@ -237,7 +240,10 @@ var app =
                     , callback: function (c) {
                         $("#uploading").show();
                         $("#loadinguUpload").hide();
-                        if (c.ok) { callback(); }
+                        if (c.ok) {
+                            app.currentTallyId = c.newId;
+                            callback();
+                        }
                         else {
                             $("#tallyError").html(c.error.replace(/\n/g, "<br>"));
                             $("#tallyError").show();
@@ -270,35 +276,35 @@ var app =
         formatTime: function (d) {
             return d.getHours() + ":" + d.getMinutes();
         },
-/*
-        // Método que puede servir para probarlo en el escritorio
-        uploadFile: function (file, imgBut) {
-            var data = new FormData();
-            data.append('file-0', file);
-            data.append("schemaId", app.SCHEMA_ID);
-            data.append("payload", JSON.stringify({ entityId: app.ENTITY_TALLY_ID }));
-
-            libs.callRPC({
-                url: "/api/instancesapi/SaveFile",
-                contentType: false,
-                processData: false,
-                data: data,
-                post: true,
-                callback: function (data) {
-                    app.images[imgBut.id] = file.name;
-                    $(imgBut).removeClass("btn-warning");
-                    $(imgBut).addClass("btn-success");
-                    app.uploadTally(function () {
-                        delete app.images[imgBut.id];
+        /*
+                // Método que puede servir para probarlo en el escritorio
+                uploadFile: function (file, imgBut) {
+                    var data = new FormData();
+                    data.append('file-0', file);
+                    data.append("schemaId", app.SCHEMA_ID);
+                    data.append("payload", JSON.stringify({ entityId: app.ENTITY_TALLY_ID }));
+        
+                    libs.callRPC({
+                        url: "/api/instancesapi/SaveFile",
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        post: true,
+                        callback: function (data) {
+                            app.images[imgBut.id] = file.name;
+                            $(imgBut).removeClass("btn-warning");
+                            $(imgBut).addClass("btn-success");
+                            app.uploadTally(function () {
+                                delete app.images[imgBut.id];
+                            });
+                        },
+                        errorCallback: function (error) {
+                            $(imgBut).removeClass("btn-warning");
+                            $(imgBut).addClass("btn-alert");
+                        }
                     });
                 },
-                errorCallback: function (error) {
-                    $(imgBut).removeClass("btn-warning");
-                    $(imgBut).addClass("btn-alert");
-                }
-            });
-        },
-*/
+        */
         uploadFilePG: function (imageURI, imgBut) {
             var fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
             var options = new FileUploadOptions();
