@@ -200,7 +200,6 @@ var app =
             $("#tallyError").hide();
             $("#loadinguUpload").show();
             var tally = {
-                id: app.currentTallyId,
                 TALL_CHOFER: $("#tChofer").val(),
                 CLIE_ID_CLIE: $("#tCliente").val(),
                 TALL_PUERTO: $("#tPuerto").val(),
@@ -227,6 +226,7 @@ var app =
                 TALL_FINALIZACION_DE_DESC: app.formatTime(new Date())
             };
 
+            if (app.currentTallyId) { tally.id = app.currentTallyId; }
             libs.callRPC(
                 {
                     url: "api/instancesapi/SaveInstanceFull"
