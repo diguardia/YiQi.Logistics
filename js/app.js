@@ -339,10 +339,10 @@ var app =
                     });
                 },
                 function (error) {
-                    alert("Error al subir el archivo. Se reintentará en un minuto");
                     $(imgBut).addClass("btn-alert");
                     $(imgBut).removeClass("btn-warning");
-                    setTimeout(function() {app.uploadFilePG(imageURI, imgBut); }, 1000);
+                    setTimeout(function() {app.uploadFilePG(imageURI, imgBut); }, 1000 * 60);
+                    alert("Error al subir el archivo. Se reintentará en un minuto");
                 },
                 options
             );
