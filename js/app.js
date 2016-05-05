@@ -328,6 +328,9 @@ var app =
                 },
         */
         uploadFilePG: function (imageURI, imgBut) {
+            $(imgBut).addClass("btn-warning");
+            $(imgBut).removeClass("btn-success");
+            $(imgBut).removeClass("btn-danger");
             var fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
             var options = new FileUploadOptions();
             options.fileKey = "file";
@@ -351,9 +354,6 @@ var app =
             ft.upload(imageURI, encodeURI(app.SERVER_URL + "api/instancesApi/SaveFile"),
                 function (result) {
                     app.images[imgBut.id] = fileName;
-                    if ($(imgBut).hasClass("btn-default")) {
-                        $(imgBut).removeClass("btn-default");
-                    }
                     app.uploadTally(function () {
                         $(imgBut).addClass("btn-success");
                         $(imgBut).removeClass("btn-warning");
