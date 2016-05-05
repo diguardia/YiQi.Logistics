@@ -282,7 +282,7 @@ var app =
             return d.getHours() + ":" + d.getMinutes();
         },
 
-        saveFile(fileURI) {
+        saveFile: function (fileURI) {
             window.resolveLocalFileSystemURI(fileURI,
                 function (fileEntry) {
                     fileSystem.root.getDirectory("YiQi", { create: true },
