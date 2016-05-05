@@ -52,7 +52,7 @@ var app =
                 $("#mainMsg").hide();
             }
             $("#labelTime").text(app.formatTime(new Date()));
-            try { cordova.getAppVersion(function (version) { $("#labelVersion").text = version; }); } catch (x) { }
+            try { cordova.getAppVersion(function (version) { $("#labelVersion").text = version; }); } catch (x) { $("#labelVersion").text = x; }
 
             app.images = {};
         },
@@ -283,16 +283,19 @@ var app =
         },
 
         saveFile: function (fileURI) {
-            window.resolveLocalFileSystemURI(fileURI,
-                function (fileEntry) {
-                    fileSystem.root.getDirectory("YiQi", { create: true },
-                        function (dataDir) {
-                            var d = new Date(); var n = d.getTime(); var newFileName = n + ".jpg";
-                            fileEntry.moveTo(dataDir, newFileName, null, fsFail);
-                        },
-                        function (e) { alert("Error al recuperar la carpeta de guardado " + e); })
-                },
+            window.resolveLocalFileSystemURI(fileURI, function (fileEntry) { app.saveFileEntry(fileEntry); },
                 function (x) { alert("Error al recuperar el fileEntry " + x); });
+        },
+
+        saveFileEntry: function (fileEntry) {
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) {
+                fileSystem.root.getDirectory("YiQi", { create: true },
+                    function (dataDir) {
+                        var d = new Date(); var n = d.getTime(); var newFileName = n + ".jpg";
+                        fileEntry.moveTo(dataDir, newFileName, null, fsFail);
+                    },
+                    function (e) { alert("Error al recuperar la carpeta de guardado " + e); });
+            }, function (e) { alert(e); });
         },
         /*
                 // Método que puede servir para probarlo en el escritorio
