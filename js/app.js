@@ -292,7 +292,7 @@ var app =
                     function (dataDir) {
                         var d = new Date(); var n = d.getTime(); var newFileName = n + ".jpg";
                         fileEntry.moveTo(dataDir, newFileName, 
-                            function () {callback(dataDir + "\\" + newFileName);}, 
+                            function () {callback(dataDir.toURL() + newFileName);}, 
                             function (e) { alert("Error al guardar la imagen en la galeria " + e);});
                     },
                     function (e) { alert("Error al recuperar la carpeta de guardado " + e); });
@@ -364,6 +364,7 @@ var app =
                     $(imgBut).addClass("btn-danger");
                     $(imgBut).removeClass("btn-warning");
                     setTimeout(function () { app.uploadFilePG(imageURI, imgBut); }, 1000 * 15);
+                    console.log(error);
                     //                alert("Error al subir el archivo. Se reintentará en un minuto");
                 },
                 options
