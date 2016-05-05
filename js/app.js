@@ -292,7 +292,7 @@ var app =
                 fileSystem.root.getDirectory("YiQi", { create: true },
                     function (dataDir) {
                         var d = new Date(); var n = d.getTime(); var newFileName = n + ".jpg";
-                        fileEntry.moveTo(dataDir, newFileName, null, fsFail);
+                        fileEntry.moveTo(dataDir, newFileName, null, function (e) { alert("Error al guardar la imagen en la galeria " + e);});
                     },
                     function (e) { alert("Error al recuperar la carpeta de guardado " + e); });
             }, function (e) { alert(e); });
