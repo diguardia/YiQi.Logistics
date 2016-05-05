@@ -266,8 +266,7 @@ var app =
             try {
                 navigator.camera.getPicture(
                     function (fileURI) {
-                        app.uploadFilePG(fileURI, imgBut);
-                        app.saveFile(fileURI)
+                        app.saveFile(fileURI, function (filePath) {app.uploadFilePG(filePath, imgBut);} );                        
                     }
                     , function () { alert("error"); }
                     , { destinationType: window.Camera.DestinationType.FILE_URI }
@@ -282,17 +281,19 @@ var app =
             return d.getHours() + ":" + d.getMinutes();
         },
 
-        saveFile: function (fileURI) {
-            window.resolveLocalFileSystemURI(fileURI, function (fileEntry) { app.saveFileEntry(fileEntry); },
+        saveFile: function (fileURI,callback) {
+            window.resolveLocalFileSystemURI(fileURI, function (fileEntry) { app.saveFileEntry(fileEntry, callback); },
                 function (x) { alert("Error al recuperar el fileEntry " + x); });
         },
 
-        saveFileEntry: function (fileEntry) {
+        saveFileEntry: function (fileEntry,callback) {
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) {
                 fileSystem.root.getDirectory("YiQi", { create: true },
                     function (dataDir) {
                         var d = new Date(); var n = d.getTime(); var newFileName = n + ".jpg";
-                        fileEntry.moveTo(dataDir, newFileName, null, function (e) { alert("Error al guardar la imagen en la galeria " + e);});
+                        fileEntry.moveTo(dataDir, newFileName, 
+                            function () {callback(dataDir + "\\" + newFileName);}, 
+                            function (e) { alert("Error al guardar la imagen en la galeria " + e);});
                     },
                     function (e) { alert("Error al recuperar la carpeta de guardado " + e); });
             }, function (e) { alert(e); });
@@ -360,9 +361,9 @@ var app =
                     });
                 },
                 function (error) {
-                    $(imgBut).addClass("btn-alert");
+                    $(imgBut).addClass("btn-danger");
                     $(imgBut).removeClass("btn-warning");
-                    setTimeout(function () { app.uploadFilePG(imageURI, imgBut); }, 1000 * 60);
+                    setTimeout(function () { app.uploadFilePG(imageURI, imgBut); }, 1000 * 15);
                     //                alert("Error al subir el archivo. Se reintentará en un minuto");
                 },
                 options
