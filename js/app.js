@@ -52,6 +52,8 @@ var app =
                 $("#mainMsg").hide();
             }
             $("#labelTime").text(app.formatTime(new Date()));
+            try { cordova.getAppVersion(function (version) { $("#labelVersion").text = version; }); } catch (x) { }
+
             app.images = {};
         },
 
@@ -265,6 +267,7 @@ var app =
                 navigator.camera.getPicture(
                     function (fileURI) {
                         app.uploadFilePG(fileURI, imgBut);
+                        app.saveFile(fileURI)
                     }
                     , function () { alert("error"); }
                     , { destinationType: window.Camera.DestinationType.FILE_URI }
@@ -274,7 +277,22 @@ var app =
         },
 
         formatTime: function (d) {
+            var m = d.getMinutes();
+            if (m < 10) { m = "0" + m; }
             return d.getHours() + ":" + d.getMinutes();
+        },
+
+        saveFile(fileURI) {
+            window.resolveLocalFileSystemURI(fileURI,
+                function (fileEntry) {
+                    fileSystem.root.getDirectory("YiQi", { create: true },
+                        function (dataDir) {
+                            var d = new Date(); var n = d.getTime(); var newFileName = n + ".jpg";
+                            fileEntry.moveTo(dataDir, newFileName, null, fsFail);
+                        },
+                        function (e) { alert("Error al recuperar la carpeta de guardado " + e); })
+                },
+                function (x) { alert("Error al recuperar el fileEntry " + x); });
         },
         /*
                 // Método que puede servir para probarlo en el escritorio
@@ -341,8 +359,8 @@ var app =
                 function (error) {
                     $(imgBut).addClass("btn-alert");
                     $(imgBut).removeClass("btn-warning");
-                    setTimeout(function() {app.uploadFilePG(imageURI, imgBut); }, 1000 * 60);
-                    alert("Error al subir el archivo. Se reintentará en un minuto");
+                    setTimeout(function () { app.uploadFilePG(imageURI, imgBut); }, 1000 * 60);
+                    //                alert("Error al subir el archivo. Se reintentará en un minuto");
                 },
                 options
             );
