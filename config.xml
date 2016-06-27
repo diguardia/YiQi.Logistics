@@ -4,7 +4,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.yiqi.logistics"
-        version   = "1.0.7">
+        version   = "1.0.8">
 
     <name>YiQi Logistics</name>
 
@@ -54,20 +54,17 @@
     <gap:plugin name="org.apache.cordova.camera" source="npm" />
     <gap:plugin name="org.apache.cordova.media-capture" source="npm" />
     <gap:plugin name="org.apache.cordova.console" source="npm" />
-    <gap:plugin name="org.apache.cordova.contacts" source="npm" />
     <gap:plugin name="org.apache.cordova.device" source="npm" />
     <gap:plugin name="org.apache.cordova.device-motion" source="npm" />
     <gap:plugin name="org.apache.cordova.device-orientation" source="npm" />
     <gap:plugin name="org.apache.cordova.dialogs"  source="npm"/>
     <gap:plugin name="org.apache.cordova.file"  source="npm"/>
     <gap:plugin name="org.apache.cordova.file-transfer" source="npm" />
-    <gap:plugin name="org.apache.cordova.geolocation" source="npm" />
     <gap:plugin name="org.apache.cordova.globalization" source="npm" />
     <gap:plugin name="org.apache.cordova.inappbrowser"  source="npm"/>
     <gap:plugin name="org.apache.cordova.media" source="npm" />
     <gap:plugin name="org.apache.cordova.network-information" source="npm" />
     <gap:plugin name="org.apache.cordova.splashscreen" source="npm" />
-    <gap:plugin name="org.apache.cordova.vibration" source="npm" />
 
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
