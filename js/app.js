@@ -83,6 +83,13 @@ var app =
 
         loadStaticData: function (callback) {
             $("#divSincronizing").show();
+            for (i = 1; i <= app.FILE_COUNT; i++) {
+                $("#TALL_FILE_" + i).addClass("btn-default");
+                $("#TALL_FILE_" + i).removeClass("btn-success");
+                $("#TALL_FILE_" + i).removeClass("btn-info");
+                $("#TALL_FILE_" + i + "_P").hide();
+                $("#TALL_FILE_" + i + "_P")[0].value = 0;
+            }
             libs.callRPC(
                 {
                     url: "/api/entitiesApi/GetRootDropdowns",
@@ -178,6 +185,9 @@ var app =
                     for (i = 1; i <= app.FILE_COUNT; i++) {
                         $("#TALL_FILE_" + i).addClass("btn-default");
                         $("#TALL_FILE_" + i).removeClass("btn-success");
+                        $("#TALL_FILE_" + i).removeClass("btn-info");
+                        $("#TALL_FILE_" + i + "_P").hide();
+                        $("#TALL_FILE_" + i + "_P")[0].value = 0;
                     }
                     $("#TALL_FILE_8Obs").val("");
                     $("#TALL_FILE_9Obs").val("");
@@ -266,7 +276,7 @@ var app =
             try {
                 navigator.camera.getPicture(
                     function (fileURI) {
-                        app.saveFile(fileURI, function (filePath) {app.uploadFilePG(filePath, imgBut);} );                        
+                        app.saveFile(fileURI, function (filePath) { app.uploadFilePG(filePath, imgBut); });
                     }
                     , function () { alert("error"); }
                     , { destinationType: window.Camera.DestinationType.FILE_URI }
@@ -281,19 +291,19 @@ var app =
             return d.getHours() + ":" + d.getMinutes();
         },
 
-        saveFile: function (fileURI,callback) {
+        saveFile: function (fileURI, callback) {
             window.resolveLocalFileSystemURI(fileURI, function (fileEntry) { app.saveFileEntry(fileEntry, callback); },
                 function (x) { alert("Error al recuperar el fileEntry " + x); });
         },
 
-        saveFileEntry: function (fileEntry,callback) {
+        saveFileEntry: function (fileEntry, callback) {
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) {
                 fileSystem.root.getDirectory("YiQi", { create: true },
                     function (dataDir) {
                         var d = new Date(); var n = d.getTime(); var newFileName = n + ".jpg";
-                        fileEntry.moveTo(dataDir, newFileName, 
-                            function () {callback(dataDir.toURL() + newFileName);}, 
-                            function (e) { alert("Error al guardar la imagen en la galeria " + e);});
+                        fileEntry.moveTo(dataDir, newFileName,
+                            function () { callback(dataDir.toURL() + newFileName); },
+                            function (e) { alert("Error al guardar la imagen en la galeria " + e); });
                     },
                     function (e) { alert("Error al recuperar la carpeta de guardado " + e); });
             }, function (e) { alert(e); });
@@ -351,18 +361,28 @@ var app =
             options.headers = headers;
 
             var ft = new FileTransfer();
+            $(imgBut.id + "_P").show();
+            $(imgBut.id + "_P")[0].value = 0;
+            ft.onprogress = function (e) { $(imgBut.id + "_P")[0].value = e.loaded / e.total; }
+
             ft.upload(imageURI, encodeURI(app.SERVER_URL + "api/instancesApi/SaveFile"),
                 function (result) {
+                    $(imgBut.id + "_P").hide();
                     app.images[imgBut.id] = fileName;
+                    $(imgBut).removeClass("btn-warning");
+                    $(imgBut).addClass("btn-info");
                     app.uploadTally(function () {
                         $(imgBut).addClass("btn-success");
                         $(imgBut).removeClass("btn-warning");
+                        $(imgBut).removeClass("btn-info");
                         delete app.images[imgBut.id];
                     });
                 },
                 function (error) {
+                    $(imgBut.id + "_P").hide();
                     $(imgBut).addClass("btn-danger");
                     $(imgBut).removeClass("btn-warning");
+                    $(imgBut).removeClass("btn-info");
                     setTimeout(function () { app.uploadFilePG(imageURI, imgBut); }, 1000 * 15);
                     console.log(error);
                     //                alert("Error al subir el archivo. Se reintentará en un minuto");
