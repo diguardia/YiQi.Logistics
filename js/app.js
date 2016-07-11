@@ -361,13 +361,13 @@ var app =
             options.headers = headers;
 
             var ft = new FileTransfer();
-            $(imgBut.id + "_P").show();
-            $(imgBut.id + "_P")[0].value = 0;
-            ft.onprogress = function (e) { $(imgBut.id + "_P")[0].value = e.loaded / e.total; }
+            $("#" +imgBut.id + "_P").show();
+            $("#" +imgBut.id + "_P")[0].value = 0;
+            ft.onprogress = function (e) { $("#" +imgBut.id + "_P")[0].value = e.loaded / e.total; }
 
             ft.upload(imageURI, encodeURI(app.SERVER_URL + "api/instancesApi/SaveFile"),
                 function (result) {
-                    $(imgBut.id + "_P").hide();
+                    $("#" +imgBut.id + "_P").hide();
                     app.images[imgBut.id] = fileName;
                     $(imgBut).removeClass("btn-warning");
                     $(imgBut).addClass("btn-info");
@@ -379,7 +379,7 @@ var app =
                     });
                 },
                 function (error) {
-                    $(imgBut.id + "_P").hide();
+                    $("#" +imgBut.id + "_P").hide();
                     $(imgBut).addClass("btn-danger");
                     $(imgBut).removeClass("btn-warning");
                     $(imgBut).removeClass("btn-info");
