@@ -186,6 +186,7 @@ var app =
                         $("#TALL_FILE_" + i).addClass("btn-default");
                         $("#TALL_FILE_" + i).removeClass("btn-success");
                         $("#TALL_FILE_" + i).removeClass("btn-info");
+                        $("#TALL_FILE_" + i).removeClass("btn-warning");
                         $("#TALL_FILE_" + i + "_P").hide();
                         $("#TALL_FILE_" + i + "_P")[0].value = 0;
                     }
@@ -271,6 +272,7 @@ var app =
         },
 
         capturePhoto: function (imgBut) {
+            $(imgBut).removeClass("btn-info");
             $(imgBut).addClass("btn-warning");
 
             try {
@@ -338,6 +340,7 @@ var app =
                 },
         */
         uploadFilePG: function (imageURI, imgBut) {
+            $(imgBut).removeClass("btn-info");
             $(imgBut).addClass("btn-warning");
             $(imgBut).removeClass("btn-success");
             $(imgBut).removeClass("btn-danger");
