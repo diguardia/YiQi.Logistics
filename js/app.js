@@ -366,7 +366,7 @@ var app =
             var ft = new FileTransfer();
             $("#" +imgBut.id + "_P").show();
             $("#" +imgBut.id + "_P")[0].value = 0;
-            ft.onprogress = function (e) { $("#" +imgBut.id + "_P")[0].value = e.loaded / e.total; }
+            ft.onprogress = function (e) { $("#" +imgBut.id + "_P")[0].value = (e.loaded / e.total) * 100.0; }
 
             ft.upload(imageURI, encodeURI(app.SERVER_URL + "api/instancesApi/SaveFile"),
                 function (result) {
