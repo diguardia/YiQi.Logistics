@@ -84,7 +84,9 @@ var app =
         loadStaticData: function (callback) {
             $("#divSincronizing").show();
             for (i = 1; i <= app.FILE_COUNT; i++) {
+                $("#TALL_FILE_" + i).addClass("btn");
                 $("#TALL_FILE_" + i).addClass("btn-default");
+                $("#TALL_FILE_" + i).removeClass("btn-danger");
                 $("#TALL_FILE_" + i).removeClass("btn-success");
                 $("#TALL_FILE_" + i).removeClass("btn-info");
                 $("#TALL_FILE_" + i + "_P").hide();
@@ -342,6 +344,7 @@ var app =
         uploadFilePG: function (imageURI, imgBut) {
             $(imgBut).removeClass("btn-info");
             $(imgBut).addClass("btn-warning");
+            $(imgBut).removeClass("btn-default");
             $(imgBut).removeClass("btn-success");
             $(imgBut).removeClass("btn-danger");
             var fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
@@ -376,7 +379,6 @@ var app =
                     $(imgBut).addClass("btn-info");
                     app.uploadTally(function () {
                         $(imgBut).addClass("btn-success");
-                        $(imgBut).removeClass("btn-warning");
                         $(imgBut).removeClass("btn-info");
                         delete app.images[imgBut.id];
                     });
