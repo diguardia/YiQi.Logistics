@@ -13,8 +13,10 @@ var app =
         //ENTITY_TALLY_ID: 64,
 
         FILE_COUNT: 19,
+        CADP_FILE_COUNT:20,
         formStart: null, // Hora que empieza la carga del formulario
         currentTallyId: null, // id del tally utilizado para las subidas parciales
+        currentProcessId:null,//id de proceso utilizado para las subidas parciales
 
         init: function () {
             if (app.checkToken(function () { app.showMain() }, function () { app.showLogin() }));
@@ -31,6 +33,7 @@ var app =
             $("#loginPassword").val("");
             $("#loginUsername").focus();
             $("#divTally").hide();
+            $("#divProcess").hide();
         },
 
         showMain: function (msg) {
@@ -42,6 +45,7 @@ var app =
             $("#divLogin").hide();
             $("#divLinksHeaders").show();
             $("#divTally").hide();
+            $("#divProcess").hide();
             var date = new Date();
             $("#tFechaRecepcion").val(date.toISOString().split('T')[0]);
 
@@ -67,6 +71,16 @@ var app =
 
         },
 
+        showProcess: function () {
+            $("#divMain").hide();
+            $("#divTally").hide();
+            $("#divProcess").show();
+            $("#tallyError").hide();
+            $("#divProcessImages").hide();
+            $("#butUploadProcessHeader").show();
+            app.formStart = new Date();
+
+        },
         showHideNroContenedor: function () {
             if ($("#tTipoDeVehiculo").val().indexOf("Contenedor") == 0) {
                 $("#tNroContenedor").show();
@@ -92,6 +106,15 @@ var app =
                 $("#TALL_FILE_" + i + "_P").hide();
                 $("#TALL_FILE_" + i + "_P")[0].value = 0;
             }
+            for (i = 1; i <= app.CADP_FILE_COUNT; i++) {
+                $("#CADP_FILE_" + i).addClass("btn");
+                $("#CADP_FILE_" + i).addClass("btn-default");
+                $("#CADP_FILE_" + i).removeClass("btn-danger");
+                $("#CADP_FILE_" + i).removeClass("btn-success");
+                $("#CADP_FILE_" + i).removeClass("btn-info");
+                $("#CADP_FILE_" + i + "_P").hide();
+                $("#CADP_FILE_" + i + "_P")[0].value = 0;
+            }
             libs.callRPC(
                 {
                     url: "/api/entitiesApi/GetRootDropdowns",
@@ -106,6 +129,7 @@ var app =
                                 $("#tTipoDeUnidad").append("<option value='" + this.value + "'>" + this.text + "</option>");
                             });
                             $("#divSincronizing").hide();
+
                             callback();
                         }
                         catch (ex) {
@@ -160,6 +184,14 @@ var app =
             })
         },
 
+        uploadProcessHeader: function () {
+            app.currentProcessId = null;
+            app.uploadProcess(function (c) {
+                $("#divProcessImages").show();
+                $("#butUploadProcessHeader").hide();
+            })
+        },
+
         logout: function () {
             app.username = "";
             app.password = "";
@@ -205,6 +237,40 @@ var app =
                 );
             } else {
                 $("#tallyError").text("Las imágenes: Camión Cerrado, Precinto, Abierto antes de atracar,  Al  80%, Al 50%, Vacio y Remito son obligatorios");
+                $("#tallyError").show();
+                $("#uploading").show();
+                $("#loadinguUpload").hide();
+            }
+        },
+
+        submitProcess: function () {
+            $("#uploading").hide();
+            if ($("#CADP_FILE_1").hasClass("btn-success") && $("#CADP_FILE_2").hasClass("btn-success") ) {
+                app.uploadProcess(function () {
+                    app.showMain("Tally subido con éxito");
+                    $("#tCliente").val("");
+                    $("#pTanda").val("");
+                    $("#pCarpeta").val("");
+                       for (i = 1; i <= app.CADP_FILE_COUNT; i++) {
+                        $("#CADP_FILE_" + i).addClass("btn-default");
+                        $("#CADP_FILE_" + i).removeClass("btn-success");
+                        $("#CADP_FILE_" + i).removeClass("btn-info");
+                        $("#CADP_FILE_" + i).removeClass("btn-warning");
+                        $("#CADP_FILE_" + i + "_P").hide();
+                        $("#CADP_FILE_" + i + "_P")[0].value = 0;
+                    }
+                    for (i = 6; i <= app.CADP_FILE_COUNT; i++) {
+                        $("#CADP_FILE_"+ i+"Obs").val("");
+                    }
+
+                    //$("#tPallets").val()//esto tambien es una formula
+                    $("#uploading").show();
+                    $("#loadinguUpload").hide();
+                    app.showHideNroContenedor();
+                }
+                );
+            } else {
+                $("#tallyError").text("Las imágenes: Muesta y Control de Precios son obligatorias");
                 $("#tallyError").show();
                 $("#uploading").show();
                 $("#loadinguUpload").hide();
@@ -266,6 +332,65 @@ var app =
                     }
                     , errorCallback: function (e) {
                         $("#tallyError").text("Error al subir el tally " + e);
+                        $("#tallyError").show();
+                        $("#uploading").show();
+                        $("#loadinguUpload").hide();
+                    }
+                });
+        },
+
+        uploadProcess: function (callback) {
+            $("#tallyError").hide();
+            $("#loadinguUpload").show();
+            var process = {
+                
+                CLIE_ID_CLIE: $("#tCliente").val(),
+                CADP_TANDA: $("#pTanda").val(),
+                CADP_CARPETA: $("#pCarpeta").val(),
+
+                CADP_OBSERVACION_1: $("#TALL_FILE_6Obs").val(),
+                CADP_OBSERVACION_2: $("#TALL_FILE_7Obs").val(),
+                CADP_OBSERVACION_3: $("#TALL_FILE_8Obs").val(),
+                CADP_OBSERVACION_4: $("#TALL_FILE_9Obs").val(),
+                CADP_OBSERVACION_5: $("#TALL_FILE_10Obs").val(),
+                CADP_OBSERVACION_6: $("#TALL_FILE_11Obs").val(),
+                CADP_OBSERVACION_7: $("#TALL_FILE_12Obs").val(),
+                CADP_OBSERVACION_8: $("#TALL_FILE_13Obs").val(),
+                CADP_OBSERVACION_9: $("#TALL_FILE_14Obs").val(),
+                CADP_OBSERVACION_10: $("#TALL_FILE_15Obs").val(),
+                CADP_OBSERVACION_11: $("#TALL_FILE_16Obs").val(),
+                CADP_OBSERVACION_12: $("#TALL_FILE_17Obs").val(),
+                CADP_OBSERVACION_13: $("#TALL_FILE_18Obs").val(),
+                CADP_OBSERVACION_14: $("#TALL_FILE_19Obs").val(),
+                CADP_OBSERVACION_15: $("#TALL_FILE_20Obs").val()
+
+            };
+
+            if (app.currentProcessId) { process.id = app.currentProcessId; }
+            libs.callRPC(
+                {
+                    url: "api/instancesapi/SaveInstanceFull"
+                    , data: {
+                        schemaId: app.SCHEMA_ID
+                        , entityName: "CARPETA_DE_PROCESO"
+                        , json: JSON.stringify(process)
+                        , jsonNewFiles: JSON.stringify(app.images)
+                        , jsonRemovedFiles: JSON.stringify([])
+                    }
+                    , callback: function (c) {
+                        $("#uploading").show();
+                        $("#loadinguUpload").hide();
+                        if (c.ok) {
+                            app.currentProcessId = c.newId;
+                            callback();
+                        }
+                        else {
+                            $("#tallyError").html(c.error.replace(/\n/g, "<br>"));
+                            $("#tallyError").show();
+                        }
+                    }
+                    , errorCallback: function (e) {
+                        $("#tallyError").text("Error al subir el proceso " + e);
                         $("#tallyError").show();
                         $("#uploading").show();
                         $("#loadinguUpload").hide();
