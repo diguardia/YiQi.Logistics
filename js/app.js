@@ -421,14 +421,14 @@ var app =
             });
     },
 
-    capturePhoto: function (imgBut) {
+    capturePhoto: function (imgBut,ToP) {
         $(imgBut).removeClass("btn-info");
         $(imgBut).addClass("btn-warning");
 
         try {
             navigator.camera.getPicture(
                 function (fileURI) {
-                    app.saveFile(fileURI, function (filePath) { app.uploadFilePG(filePath, imgBut); });
+                    app.saveFile(fileURI, function (filePath) { app.uploadFilePG(filePath, imgBut,top); });
                 }
                 , function () { alert("error"); }
                 , { destinationType: window.Camera.DestinationType.FILE_URI }
@@ -525,18 +525,26 @@ var app =
                 app.images[imgBut.id] = fileName;
                 $(imgBut).removeClass("btn-warning");
                 $(imgBut).addClass("btn-info");
-                app.uploadTally(function () {
-                    $(imgBut).addClass("btn-success");
-                    $(imgBut).removeClass("btn-info");
-                    delete app.images[imgBut.id];
-                });
+                if (top == "T") {
+                    app.uploadTally(function () {
+                        $(imgBut).addClass("btn-success");
+                        $(imgBut).removeClass("btn-info");
+                        delete app.images[imgBut.id];
+                    });
+                } else if (top == "P") {
+                    app.uploadProcess(function () {
+                        $(imgBut).addClass("btn-success");
+                        $(imgBut).removeClass("btn-info");
+                        delete app.images[imgBut.id];
+                    });
+                }
             },
             function (error) {
                 $("#" + imgBut.id + "_P").hide();
                 $(imgBut).addClass("btn-danger");
                 $(imgBut).removeClass("btn-warning");
                 $(imgBut).removeClass("btn-info");
-                setTimeout(function () { app.uploadFilePG(imageURI, imgBut); }, 1000 * 15);
+                setTimeout(function () { app.uploadFilePG(imageURI, imgBut,top); }, 1000 * 15);
                 console.log(error);
                 //                alert("Error al subir el archivo. Se reintentará en un minuto");
             },
