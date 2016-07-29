@@ -489,7 +489,7 @@ var app =
                 });
             },
     */
-    uploadFilePG: function (imageURI, imgBut) {
+    uploadFilePG: function (imageURI, imgBut,top) {
         $(imgBut).removeClass("btn-info");
         $(imgBut).addClass("btn-warning");
         $(imgBut).removeClass("btn-default");
