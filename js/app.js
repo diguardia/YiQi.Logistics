@@ -428,7 +428,7 @@ var app =
         try {
             navigator.camera.getPicture(
                 function (fileURI) {
-                    app.saveFile(fileURI, function (filePath) { app.uploadFilePG(filePath, imgBut,top); });
+                    app.saveFile(fileURI, function (filePath) { app.uploadFilePG(filePath, imgBut,ToP); });
                 }
                 , function () { alert("error"); }
                 , { destinationType: window.Camera.DestinationType.FILE_URI }
