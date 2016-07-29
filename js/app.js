@@ -77,7 +77,7 @@ var app =
         $("#divMain").hide();
         $("#divTally").hide();
         $("#divProcess").show();
-        $("#tallyError").hide();
+        $("#processError").hide();
         $("#divProcessImages").hide();
         $("#butUploadProcessHeader").show();
         app.formStart = new Date();
@@ -293,8 +293,8 @@ var app =
             }
             );
         } else {
-            $("#tallyError").text("Las imágenes: Muesta y Control de Precios son obligatorias");
-            $("#tallyError").show();
+            $("#processError").text("Las imágenes: Muesta y Control de Precios son obligatorias");
+            $("#processError").show();
             $("#uploadingProcess").show();
             $("#loadinguUploadProcess").hide();
         }
@@ -363,7 +363,7 @@ var app =
     },
 
     uploadProcess: function (callback) {
-        $("#tallyError").hide();
+        $("#processError").hide();
         $("#loadinguUploadProcess").show();
         var process = {
 
@@ -408,13 +408,13 @@ var app =
                         callback();
                     }
                     else {
-                        $("#tallyError").html(c.error.replace(/\n/g, "<br>"));
-                        $("#tallyError").show();
+                        $("#processError").html(c.error.replace(/\n/g, "<br>"));
+                        $("#processError").show();
                     }
                 }
                 , errorCallback: function (e) {
-                    $("#tallyError").text("Error al subir el proceso " + e);
-                    $("#tallyError").show();
+                    $("#processError").text("Error al subir el proceso " + e);
+                    $("#processError").show();
                     $("#uploadingProcess").show();
                     $("#loadinguUploadProcess").hide();
                 }
