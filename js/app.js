@@ -267,7 +267,7 @@ var app =
     },
 
     submitProcess: function () {
-        $("#uploading").hide();
+        $("#uploadingProcess").hide();
         if ($("#CADP_FILE_1").hasClass("btn-success") && $("#CADP_FILE_2").hasClass("btn-success")) {
             app.uploadProcess(function () {
                 app.showMain("Tally subido con éxito");
@@ -286,17 +286,17 @@ var app =
                     $("#CADP_FILE_" + i + "Obs").val("");
                 }
 
-                //$("#tPallets").val()//esto tambien es una formula
-                $("#uploading").show();
-                $("#loadinguUpload").hide();
+
+                $("#uploadingProcess").show();
+                $("#loadinguUploadProcess").hide();
                 app.showHideNroContenedor();
             }
             );
         } else {
             $("#tallyError").text("Las imágenes: Muesta y Control de Precios son obligatorias");
             $("#tallyError").show();
-            $("#uploading").show();
-            $("#loadinguUpload").hide();
+            $("#uploadingProcess").show();
+            $("#loadinguUploadProcess").hide();
         }
     },
 
@@ -364,28 +364,28 @@ var app =
 
     uploadProcess: function (callback) {
         $("#tallyError").hide();
-        $("#loadinguUpload").show();
+        $("#loadinguUploadProcess").show();
         var process = {
 
             CLIE_ID_CLIE: $("#pCliente").val(),
             CADP_TANDA: $("#pTanda").val(),
             CADP_CARPETA: $("#pCarpeta").val(),
 
-            CADP_OBSERVACION_1: $("#TALL_FILE_6Obs").val(),
-            CADP_OBSERVACION_2: $("#TALL_FILE_7Obs").val(),
-            CADP_OBSERVACION_3: $("#TALL_FILE_8Obs").val(),
-            CADP_OBSERVACION_4: $("#TALL_FILE_9Obs").val(),
-            CADP_OBSERVACION_5: $("#TALL_FILE_10Obs").val(),
-            CADP_OBSERVACION_6: $("#TALL_FILE_11Obs").val(),
-            CADP_OBSERVACION_7: $("#TALL_FILE_12Obs").val(),
-            CADP_OBSERVACION_8: $("#TALL_FILE_13Obs").val(),
-            CADP_OBSERVACION_9: $("#TALL_FILE_14Obs").val(),
-            CADP_OBSERVACION_10: $("#TALL_FILE_15Obs").val(),
-            CADP_OBSERVACION_11: $("#TALL_FILE_16Obs").val(),
-            CADP_OBSERVACION_12: $("#TALL_FILE_17Obs").val(),
-            CADP_OBSERVACION_13: $("#TALL_FILE_18Obs").val(),
-            CADP_OBSERVACION_14: $("#TALL_FILE_19Obs").val(),
-            CADP_OBSERVACION_15: $("#TALL_FILE_20Obs").val()
+            CADP_OBSERVACION_1: $("#CADP_FILE_6Obs").val(),
+            CADP_OBSERVACION_2: $("#CADP_FILE_7Obs").val(),
+            CADP_OBSERVACION_3: $("#CADP_FILE_8Obs").val(),
+            CADP_OBSERVACION_4: $("#CADP_FILE_9Obs").val(),
+            CADP_OBSERVACION_5: $("#CADP_FILE_10Obs").val(),
+            CADP_OBSERVACION_6: $("#CADP_FILE_11Obs").val(),
+            CADP_OBSERVACION_7: $("#CADP_FILE_12Obs").val(),
+            CADP_OBSERVACION_8: $("#CADP_FILE_13Obs").val(),
+            CADP_OBSERVACION_9: $("#CADP_FILE_14Obs").val(),
+            CADP_OBSERVACION_10: $("#CADP_FILE_15Obs").val(),
+            CADP_OBSERVACION_11: $("#CADP_FILE_16Obs").val(),
+            CADP_OBSERVACION_12: $("#CADP_FILE_17Obs").val(),
+            CADP_OBSERVACION_13: $("#CADP_FILE_18Obs").val(),
+            CADP_OBSERVACION_14: $("#CADP_FILE_19Obs").val(),
+            CADP_OBSERVACION_15: $("#CADP_FILE_20Obs").val()
 
         };
 
@@ -401,8 +401,8 @@ var app =
                     , jsonRemovedFiles: JSON.stringify([])
                 }
                 , callback: function (c) {
-                    $("#uploading").show();
-                    $("#loadinguUpload").hide();
+                    $("#uploadingProcess").show();
+                    $("#loadinguUploadProcess").hide();
                     if (c.ok) {
                         app.currentProcessId = c.newId;
                         callback();
@@ -415,8 +415,8 @@ var app =
                 , errorCallback: function (e) {
                     $("#tallyError").text("Error al subir el proceso " + e);
                     $("#tallyError").show();
-                    $("#uploading").show();
-                    $("#loadinguUpload").hide();
+                    $("#uploadingProcess").show();
+                    $("#loadinguUploadProcess").hide();
                 }
             });
     },
