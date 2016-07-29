@@ -270,7 +270,7 @@ var app =
         $("#uploadingProcess").hide();
         if ($("#CADP_FILE_1").hasClass("btn-success") && $("#CADP_FILE_2").hasClass("btn-success")) {
             app.uploadProcess(function () {
-                app.showMain("Tally subido con éxito");
+                app.showMain("Proceso subido con éxito");
                 $("#pCliente").val("");
                 $("#pTanda").val("");
                 $("#pCarpeta").val("");
