@@ -15,7 +15,7 @@ var app =
     //ENTITY_TALLY_ID: 64,
 
     FILE_COUNT: 19,
-    CADP_FILE_COUNT: 20,
+    CADP_FILE_COUNT: 18,
     formStart: null, // Hora que empieza la carga del formulario
     currentTallyId: null, // id del tally utilizado para las subidas parciales
     currentProcessId: null,//id de proceso utilizado para las subidas parciales
@@ -274,6 +274,10 @@ var app =
                 $("#pCliente").val("");
                 $("#pTanda").val("");
                 $("#pCarpeta").val("");
+                $("#Estampilla")[0].checked = false;
+                $("#Etiqueta")[0].checked = false;
+                $("#Alarmado")[0].checked = false;
+                $("#Plastiflecha")[0].checked = false;
                 for (i = 1; i <= app.CADP_FILE_COUNT; i++) {
                     $("#CADP_FILE_" + i).addClass("btn-default");
                     $("#CADP_FILE_" + i).removeClass("btn-success");
@@ -282,7 +286,7 @@ var app =
                     $("#CADP_FILE_" + i + "_P").hide();
                     $("#CADP_FILE_" + i + "_P")[0].value = 0;
                 }
-                for (i = 6; i <= app.CADP_FILE_COUNT; i++) {
+                for (i = 4; i <= app.CADP_FILE_COUNT; i++) {
                     $("#CADP_FILE_" + i + "Obs").val("");
                 }
 
@@ -370,7 +374,12 @@ var app =
             CLIE_ID_CLIE: $("#pCliente").val(),
             CADP_TANDA: $("#pTanda").val(),
             CADP_CARPETA: $("#pCarpeta").val(),
-
+            CADP_ESTAMPILLA: $("#Estampilla")[0].checked,
+            CADP_ETIQUETA: $("#Etiqueta")[0].checked,
+            CADP_ALARMADO: $("#Alarmado")[0].checked,
+            CADP_PLASTIFLECHA: $("#Plastiflecha").val(), 
+            CADP_OBSERVACION_14: $("#CADP_FILE_4Obs").val(),
+            CADP_OBSERVACION_15: $("#CADP_FILE_5Obs").val(),
             CADP_OBSERVACION_1: $("#CADP_FILE_6Obs").val(),
             CADP_OBSERVACION_2: $("#CADP_FILE_7Obs").val(),
             CADP_OBSERVACION_3: $("#CADP_FILE_8Obs").val(),
@@ -383,9 +392,8 @@ var app =
             CADP_OBSERVACION_10: $("#CADP_FILE_15Obs").val(),
             CADP_OBSERVACION_11: $("#CADP_FILE_16Obs").val(),
             CADP_OBSERVACION_12: $("#CADP_FILE_17Obs").val(),
-            CADP_OBSERVACION_13: $("#CADP_FILE_18Obs").val(),
-            CADP_OBSERVACION_14: $("#CADP_FILE_19Obs").val(),
-            CADP_OBSERVACION_15: $("#CADP_FILE_20Obs").val()
+            CADP_OBSERVACION_13: $("#CADP_FILE_18Obs").val()
+  
 
         };
 
