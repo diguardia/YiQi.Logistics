@@ -14,7 +14,7 @@ var app =
     //SERVER_URL: "http://localhost:5001/", 
     //ENTITY_TALLY_ID: 64,
 
-    FILE_COUNT: 19,
+    FILE_COUNT: 27,
     CADP_FILE_COUNT: 18,
     formStart: null, // Hora que empieza la carga del formulario
     currentTallyId: null, // id del tally utilizado para las subidas parciales
@@ -330,6 +330,14 @@ var app =
             TALL_OBSERVACION_10: $("#TALL_FILE_17Obs").val(),
             TALL_OBSERVACION_11: $("#TALL_FILE_18Obs").val(),
             TALL_OBSERVACION_12: $("#TALL_FILE_19Obs").val(),
+            TALL_OBSERVACION_13: $("#TALL_FILE_20Obs").val(),
+            TALL_OBSERVACION_14: $("#TALL_FILE_21Obs").val(),
+            TALL_OBSERVACION_15: $("#TALL_FILE_22Obs").val(),
+            TALL_OBSERVACION_16: $("#TALL_FILE_23Obs").val(),
+            TALL_OBSERVACION_17: $("#TALL_FILE_24Obs").val(),
+            TALL_OBSERVACION_18: $("#TALL_FILE_25Obs").val(),
+            TALL_OBSERVACION_19: $("#TALL_FILE_26Obs").val(),
+            TALL_OBSERVACION_20: $("#TALL_FILE_27Obs").val(),
             TALL_INICIO_DE_DESCARGA: app.formatTime(app.formStart),
             TALL_FINALIZACION_DE_DESC: app.formatTime(new Date())
         };
