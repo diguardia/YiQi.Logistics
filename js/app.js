@@ -2,7 +2,7 @@ var app =
 {
     // Prod
     SCHEMA_ID: 35, // SPF
-    SERVER_URL: "http://me.yiqi.com.ar/",
+    SERVER_URL: "https://me.yiqi.com.ar/",
     ENTITY_TALLY_ID: 861,
     ID_CLIENTE: 5160,
     CADP_ID_CLIENTE: 5615,
@@ -352,6 +352,7 @@ var app =
                     , json: JSON.stringify(tally)
                     , jsonNewFiles: JSON.stringify(app.images)
                     , jsonRemovedFiles: JSON.stringify([])
+                    , async:false
                 }
                 , callback: function (c) {
                     $("#uploading").show();
