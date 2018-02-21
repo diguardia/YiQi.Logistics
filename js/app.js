@@ -416,6 +416,7 @@ var app =
                     , json: JSON.stringify(process)
                     , jsonNewFiles: JSON.stringify(app.images)
                     , jsonRemovedFiles: JSON.stringify([])
+                    , async: false
                 }
                 , callback: function (c) {
                     $("#uploadingProcess").show();
