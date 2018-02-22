@@ -50,7 +50,7 @@
     -->
 
     <!-- Plugins -->
-
+	<gap:plugin name="cordova-plugin-android-permissions" source="npm"/>
     <!-- Core plugins -->
 	<!--<gap:plugin name="org.apache.cordova.battery-status"  source="npm"/>-->
 	<gap:plugin name="org.apache.cordova.battery-status" spec="https://github.com/apache/cordova-plugin-battery-status.git" source="git"/>    
