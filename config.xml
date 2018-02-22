@@ -67,7 +67,7 @@
     <!--<gap:plugin name="org.apache.cordova.dialogs"  source="npm"/>-->
 	<gap:plugin name="org.apache.cordova.dialogs" spec="https://github.com/apache/cordova-plugin-dialogs.git" source="git"/>
     <!--<gap:plugin name="cordova-plugin-file" spec="https://github.com/apache/cordova-plugin-file.git" source="git"/>-->
-	<plugin name="cordova-plugin-file" spec="~6.0.1" />
+	<plugin name="cordova-plugin-file" spec="4.0.0" />
 											     
 	<!--<plugin name="cordova-plugin-file" spec="https://github.com/apache/cordova-plugin-file.git" source="git"/>-->
     <!--<gap:plugin name="org.apache.cordova.file-transfer" source="npm" />-->
