@@ -49,9 +49,7 @@
         <preference name="phonegap-version"       value="3.5.0" />
     -->
 	
-	<gap:config-file platform="android" parent="/manifest" mode="add">
-		<uses-permission android:name="android.permission.CAMERA" />
-	</gap:config-file> 
+
 
     <!-- Plugins -->
 	<gap:plugin name="cordova-plugin-android-permissions" source="npm"/>
