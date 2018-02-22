@@ -57,8 +57,9 @@
 	<!--<gap:plugin name="org.apache.cordova.battery-status"  source="npm"/>-->
 	<gap:plugin name="org.apache.cordova.battery-status" spec="https://github.com/apache/cordova-plugin-battery-status.git" source="git"/>    
     <!--<gap:plugin name="org.apache.cordova.camera" source="npm" />-->
+	<plugin name="cordova-plugin-camera" spec="~4.0.2" />
 	<!--<gap:plugin name="org.apache.cordova.camera" spec="https://github.com/apache/cordova-plugin-camera.git" source="git" />-->
-	<plugin name="cordova-plugin-camera" spec="1.2.0" source="pgb" />
+	<!--<plugin name="cordova-plugin-camera" spec="1.2.0" source="pgb" />-->
     <!--<gap:plugin name="org.apache.cordova.media-capture" source="npm" />-->
 	<gap:plugin name="org.apache.cordova.media-capture" spec="https://github.com/apache/cordova-plugin-media-capture.git" source="git" />
     <!--<gap:plugin name="org.apache.cordova.console" source="npm" />-->
