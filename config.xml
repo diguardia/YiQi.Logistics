@@ -50,10 +50,12 @@
     <!-- Plugins -->
 
     <!-- Core plugins -->
+	<!--<gap:plugin name="org.apache.cordova.battery-status"  source="npm"/>-->
 	<gap:plugin name="org.apache.cordova.battery-status" spec="https://github.com/apache/cordova-plugin-battery-status.git" source="git"/>    
-    <!--<gap:plugin name="org.apache.cordova.battery-status"  source="npm"/>-->
-    <gap:plugin name="org.apache.cordova.camera" source="npm" />
-    <gap:plugin name="org.apache.cordova.media-capture" source="npm" />
+    <!--<gap:plugin name="org.apache.cordova.camera" source="npm" />-->
+	<gap:plugin name="org.apache.cordova.camera" spec="https://github.com/apache/cordova-plugin-camera.git" source="git" />
+    <!--<gap:plugin name="org.apache.cordova.media-capture" source="npm" />-->
+	<gap:plugin name="org.apache.cordova.media-capture" spec="https://github.com/apache/cordova-plugin-media-capture.git" source="git" />
     <gap:plugin name="org.apache.cordova.console" source="npm" />
     <gap:plugin name="org.apache.cordova.device" source="npm" />
     <gap:plugin name="org.apache.cordova.device-motion" source="npm" />
