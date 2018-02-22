@@ -56,10 +56,14 @@
 	<gap:plugin name="org.apache.cordova.camera" spec="https://github.com/apache/cordova-plugin-camera.git" source="git" />
     <!--<gap:plugin name="org.apache.cordova.media-capture" source="npm" />-->
 	<gap:plugin name="org.apache.cordova.media-capture" spec="https://github.com/apache/cordova-plugin-media-capture.git" source="git" />
-    <gap:plugin name="org.apache.cordova.console" source="npm" />
-    <gap:plugin name="org.apache.cordova.device" source="npm" />
-    <gap:plugin name="org.apache.cordova.device-motion" source="npm" />
-    <gap:plugin name="org.apache.cordova.device-orientation" source="npm" />
+    <!--<gap:plugin name="org.apache.cordova.console" source="npm" />-->
+	<gap:plugin name="org.apache.cordova.console" spec="https://github.com/apache/cordova-plugin-console.git" source="git" />
+    <!--<gap:plugin name="org.apache.cordova.device" source="npm" />-->
+	<gap:plugin name="org.apache.cordova.device" spec="https://github.com/apache/cordova-plugin-device.git" source="git" />
+    <!--<gap:plugin name="org.apache.cordova.device-motion" source="npm" />-->
+	<gap:plugin name="org.apache.cordova.device-motion" spec="https://github.com/apache/cordova-plugin-device-motion.git" source="git" />
+    <!--<gap:plugin name="org.apache.cordova.device-orientation" source="npm" />-->
+	<gap:plugin name="org.apache.cordova.device-orientation" spec="https://github.com/apache/cordova-plugin-device-orientation" source="git" />
     <gap:plugin name="org.apache.cordova.dialogs"  source="npm"/>
     <gap:plugin name="org.apache.cordova.file"  source="npm"/>
     <gap:plugin name="org.apache.cordova.file-transfer" source="npm" />
