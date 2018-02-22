@@ -73,12 +73,12 @@
     <!--<gap:plugin name="org.apache.cordova.dialogs"  source="npm"/>-->
 	<gap:plugin name="org.apache.cordova.dialogs" spec="https://github.com/apache/cordova-plugin-dialogs.git" source="git"/>
     <!--<gap:plugin name="cordova-plugin-file" spec="https://github.com/apache/cordova-plugin-file.git" source="git"/>-->
-	<plugin name="cordova-plugin-file" spec="4.0.0" />
+	<plugin name="cordova-plugin-file" spec="~6.0.1" />
 											     
 	<!--<plugin name="cordova-plugin-file" spec="https://github.com/apache/cordova-plugin-file.git" source="git"/>-->
     <!--<gap:plugin name="org.apache.cordova.file-transfer" source="npm" />-->
 	
-	<plugin name="cordova-plugin-file-transfer" spec="~1.6.3"/>
+	<plugin name="cordova-plugin-file-transfer" spec="~1.7.1" />
     <!--<gap:plugin name="org.apache.cordova.globalization" source="npm" />-->
 	<gap:plugin name="org.apache.cordova.globalization" spec="https://github.com/apache/cordova-plugin-globalization.git" source="git" />
     <!--<gap:plugin name="org.apache.cordova.inappbrowser"  source="npm"/>-->
