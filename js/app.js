@@ -252,7 +252,7 @@ var app =
                 $("#TALL_FILE_10Obs").val("");
                 $("#TALL_FILE_11Obs").val("");
                 $("#TALL_FILE_12Obs").val("");
-                //$("#tPallets").val()//esto tambien es una formula
+                $("#tPallets").val();
                 $("#uploading").show();
                 $("#loadinguUpload").hide();
                 app.showHideNroContenedor();
@@ -318,6 +318,7 @@ var app =
             TALL_NRO_CONTENEDOR: $("#tNroContenedor").val(),
             TALL_BULTOS_SEGUN_RTO: $("#tBultosSegunRTOPL").val(),
             TALL_PATENTES: $("#tPatentes").val(),
+            TALL_PALLETS: $("#tPallets").val(),
             TALL_OBSERVACION_1: $("#TALL_FILE_8Obs").val(),
             TALL_OBSERVACION_2: $("#TALL_FILE_9Obs").val(),
             TALL_OBSERVACION_3: $("#TALL_FILE_10Obs").val(),
