@@ -2,7 +2,7 @@ var app =
 {
     // Prod
     SCHEMA_ID: 35, // SPF
-    SERVER_URL: "https://me.yiqi.com.ar/",
+    SERVER_URL: "http://aws.yiqi.com.ar/",
     ENTITY_TALLY_ID: 861,
     ID_CLIENTE: 5160,
     CADP_ID_CLIENTE: 5615,
@@ -63,13 +63,14 @@ var app =
         app.images = {};
     },
 
-    showTally: function () {
+    showTally: function (mode) {
         $("#divMain").hide();
         $("#divTally").show();
         $("#tallyError").hide();
         $("#divTallyImages").hide();
         $("#butUploadTallyHeader").show();
         app.formStart = new Date();
+        app.tallyMode = mode;
 
     },
 
@@ -340,7 +341,8 @@ var app =
             TALL_OBSERVACION_19: $("#TALL_FILE_26Obs").val(),
             TALL_OBSERVACION_20: $("#TALL_FILE_27Obs").val(),
             TALL_INICIO_DE_DESCARGA: app.formatTime(app.formStart),
-            TALL_FINALIZACION_DE_DESC: app.formatTime(new Date())
+            TALL_FINALIZACION_DE_DESC: app.formatTime(new Date()),
+            TALL_MODE: app.tallyMode
         };
 
         if (app.currentTallyId) { tally.id = app.currentTallyId; }
