@@ -58,7 +58,7 @@ var app =
             $("#mainMsg").hide();
         }
         $("#labelTime").text(app.formatTime(new Date()));
-        try { cordova.getAppVersion(function (version) { $("#labelVersion").text = version; }); } catch (x) { $("#labelVersion").text = x; }
+        try { cordova.getAppVersion.getVersionNumber(function (version) { $("#labelVersion").text = version; }); } catch (x) { $("#labelVersion").text = x; }
 
         app.images = {};
     },
