@@ -239,6 +239,8 @@ var app =
                 $("#tTipoDeVehiculo").val("");
                 $("#tNroContenedor").val("");
                 $("#tBultosSegunRTOPL").val("");
+                $("#tBultosReales").val("");
+                $("#tBultosConObservaciones").val("");
                 $("#tPatentes").val("");
                 for (i = 1; i <= app.FILE_COUNT; i++) {
                     $("#TALL_FILE_" + i).addClass("btn-default");
@@ -318,6 +320,8 @@ var app =
             TALL_TIPO_DE_VEHICULO: $("#tTipoDeVehiculo").val(),
             TALL_NRO_CONTENEDOR: $("#tNroContenedor").val(),
             TALL_BULTOS_SEGUN_RTO: $("#tBultosSegunRTOPL").val(),
+            TALL_BULTOS_REALES: $("#tBultosReales").val(),
+            TALL_BULTOS_CON_OBSERVACI: $("#tBultosConObservaciones").val(),
             TALL_PATENTES: $("#tPatentes").val(),
             TALL_PALLETS: $("#tPallets").val(),
             TALL_OBSERVACION_1: $("#TALL_FILE_8Obs").val(),
