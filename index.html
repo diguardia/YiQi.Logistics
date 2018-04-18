@@ -24,30 +24,32 @@
         body {
             font-family: 'Lato', serif;
         }
-        
+
         .glyphicon.spinning {
             animation: spin 1s infinite linear;
             -webkit-animation: spin2 1s infinite linear;
         }
-        
+
         @keyframes spin {
             from {
                 transform: scale(1) rotate(0deg);
             }
+
             to {
                 transform: scale(1) rotate(360deg);
             }
         }
-        
+
         @-webkit-keyframes spin2 {
             from {
                 -webkit-transform: rotate(0deg);
             }
+
             to {
                 -webkit-transform: rotate(360deg);
             }
         }
-        
+
         #loading {
             position: absolute;
             width: 100%;
@@ -115,7 +117,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="page-header">
-                        <h1>Menú principal</h1> Hora del dispositivo: <span id="labelTime"></span> Versión: <span id="labelVersion"></span> 
+                        <h1>Menú principal</h1> Hora del dispositivo: <span id="labelTime"></span> Versión: <span id="labelVersion"></span>
 
                     </div>
                 </div>
@@ -142,33 +144,34 @@
                 <H2>Cabecera</H2>
                 <div class="form-group">
                     <select type="name" class="form-control" id="tCliente" placeholder="Cliente/Origen" required>
-                        <!--<option value="151">Falabella</option>
-                        <option value="2">Cliente 2</option>-->
                     </select>
                 </div>
                 <div class="form-group">
                     <input type="name" class="form-control" id="tPuerto" placeholder="Puerto" required>
                 </div>
                 <div class="form-group">
+                    <input type="number" class="form-control" id="tRto" placeholder="Remito" required>
+                </div>
+                <div class="form-group">
                     <input type="date" class="form-control" id="tFechaRecepcion" placeholder="Fecha recepción" required>
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" id="tRto" placeholder="Remito" required>
+                    <select class="form-control" id="tTipoDeVehiculo" placeholder="Tipo de unidad" required onchange="app.showHideNroContenedor()">
+                        <option>Camioneta</option>
+                        <option>Chasis</option>
+                        <option>Contenedores 20</option>
+                        <option>Contenedores 40</option>
+                        <option>Contenedores HC</option>
+                        <option>Furgón</option>
+                        <option>Semi</option>
+                        <option>Sider</option>
+                        <option>Otros</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <input type="number" class="form-control" id="tPrecintos" placeholder="Precintos" required>
                 </div>
-                <div class="form-group">
-                    <select class="form-control" id="tTipoDeVehiculo" placeholder="Tipo de unidad" required onchange="app.showHideNroContenedor()">
-                        <option>Contenedores 20</option>
-                        <option>Contenedores 40</option>
-                        <option>Contenedores HC</option>
-                        <option>Semi</option>
-                        <option>Chasis</option>
-                        <option>Camioneta</option>
-                        <option>Otros</option>
-                    </select>
-                </div>
+               
                 <div class="form-group">
                     <input type="number" class="form-control" id="tNroContenedor" placeholder="Nro Contenedor" required>
                 </div>
@@ -179,16 +182,22 @@
                     <input type="number" class="form-control" id="tBultosSegunRTOPL" placeholder="Bultos Según Rto/PL" required>
                 </div>
                 <div class="form-group">
+                    <input type="number" class="form-control" id="tBultosReales" placeholder="Bultos Reales" required>
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" id="tBultosConObservaciones" placeholder="Bultos Con Observaciones" required>
+                </div>
+                <div class="form-group">
                     <input type="name" class="form-control" id="tPatentes" placeholder="Patentes" required>
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" id="tPallets" placeholder="Pallets" required>
+                    <input type="number" class="form-control" id="tPallets" placeholder="Pallets logrados" required>
                 </div>
                 <button type="button" id="butUploadTallyHeader" class="btn btn-default" onclick="app.uploadTallyHeader();">Cargar cabecera</button>
                 <div id="divTallyImages">
                     <H2>Imágenes</H2>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_1" value="Camión Cerrado" required onclick="app.capturePhoto(this,'T')"/>
+                        <input type="button" class="form-control" id="TALL_FILE_1" value="Camión Cerrado" required onclick="app.capturePhoto(this,'T')" />
                         <progress id="TALL_FILE_1_P" style="width:100%" max="100"></progress>
                     </div>
 
@@ -217,102 +226,102 @@
                         <progress id="TALL_FILE_7_P" style="width:100%" max="100"></progress>
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_8" value="Anomalía 1" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_8" value="Observación 1" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_8_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_8Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_9" value="Anomalía 2" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_9" value="Observación 2" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_9_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_9Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_10" value="Anomalía 3" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_10" value="Observación 3" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_10_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_10Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_11" value="Anomalía 4" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_11" value="Observación 4" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_11_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_11Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_12" value="Anomalía 5" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_12" value="Observación 5" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_12_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_12Obs" placeholder="Observaciones">
                     </div>
-                                        <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_13" value="Anomalía 6" required onclick="app.capturePhoto(this, 'T')">
+                    <div class="form-group">
+                        <input type="button" class="form-control" id="TALL_FILE_13" value="Observación 6" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_13_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_13Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_14" value="Anomalía 7" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_14" value="Observación 7" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_14_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_14Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_15" value="Anomalía 8" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_15" value="Observación 8" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_15_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_15Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_16" value="Anomalía 9" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_16" value="Observación 9" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_16_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_16Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_17" value="Anomalía 10" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_17" value="Observación 10" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_17_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_17Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_18" value="Anomalía 11" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_18" value="Observación 11" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_18_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_18Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_19" value="Anomalía 12" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_19" value="Observación 12" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_19_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_19Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_20" value="Anomalía 13" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_20" value="Observación 13" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_20_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_20Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_21" value="Anomalía 14" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_21" value="Observación 14" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_21_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_21Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_22" value="Anomalía 15" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_22" value="Observación 15" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_22_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_22Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_23" value="Anomalía 16" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_23" value="Observación 16" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_23_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_23Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_24" value="Anomalía 17" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_24" value="Observación 17" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_24_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_24Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_25" value="Anomalía 18" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_25" value="Observación 18" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_25_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_25Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_26" value="Anomalía 19" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_26" value="Observación 19" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_26_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_26Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_27" value="Anomalía 20" required onclick="app.capturePhoto(this, 'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_27" value="Observación 20" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_27_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_27Obs" placeholder="Observaciones">
                     </div>
@@ -328,8 +337,7 @@
             <form role="form" data-toggle="validator" id="formLogin">
                 <H2>Cabecera</H2>
                 <div class="form-group">
-                    <select type="name" class="form-control" id="pCliente" placeholder="Cliente/Origen" required>
-                    </select>
+                    <select type="name" class="form-control" id="pCliente" placeholder="Cliente/Origen" required></select>
                 </div>
                 <div class="form-group">
                     <input type="name" class="form-control" id="pTanda" placeholder="Tanda" required>
@@ -337,7 +345,7 @@
                 <div class="form-group">
                     <input type="name" class="form-control" id="pCarpeta" placeholder="Carpeta" required>
                 </div>
-                 <button type="button" id="butUploadProcessHeader" class="btn btn-default" onclick="app.uploadProcessHeader();">Cargar cabecera</button>
+                <button type="button" id="butUploadProcessHeader" class="btn btn-default" onclick="app.uploadProcessHeader();">Cargar cabecera</button>
                 <div id="divProcessImages">
                     <H2>Imágenes</H2>
                     <div class="form-group">
@@ -359,7 +367,7 @@
                         <div class="form-group">
                             <label for="Etiqueta">Etiqueta</label><input type="checkbox" id="Etiqueta" />
                         </div>
-                       
+
                     </div>
                     <div class="form-group">
                         <div class="form-group">
@@ -370,81 +378,81 @@
                         <div class="form-group">
                             <label for="Plastiflecha">Plastiflecha</label><input type="checkbox" id="Plastiflecha" />
                         </div>
-                         
+
                     </div>
 
                     <div class="form-group">
-                        <input type="button" class="form-control" id="CADP_FILE_4" value="Anomalía 1" required onclick="app.capturePhoto(this, 'P')">
+                        <input type="button" class="form-control" id="CADP_FILE_4" value="Observación 1" required onclick="app.capturePhoto(this, 'P')">
                         <progress id="CADP_FILE_4_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="CADP_FILE_4Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="CADP_FILE_5" value="Anomalía 2" required onclick="app.capturePhoto(this, 'P')">
+                        <input type="button" class="form-control" id="CADP_FILE_5" value="Observación 2" required onclick="app.capturePhoto(this, 'P')">
                         <progress id="CADP_FILE_5_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="CADP_FILE_5Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="CADP_FILE_6" value="Anomalía 3" required onclick="app.capturePhoto(this, 'P')">
+                        <input type="button" class="form-control" id="CADP_FILE_6" value="Observación 3" required onclick="app.capturePhoto(this, 'P')">
                         <progress id="CADP_FILE_6_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="CADP_FILE_6Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="CADP_FILE_7" value="Anomalía 4" required onclick="app.capturePhoto(this, 'P')">
+                        <input type="button" class="form-control" id="CADP_FILE_7" value="Observación 4" required onclick="app.capturePhoto(this, 'P')">
                         <progress id="CADP_FILE_7_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="CADP_FILE_7Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="CADP_FILE_8" value="Anomalía 5" required onclick="app.capturePhoto(this, 'P')">
+                        <input type="button" class="form-control" id="CADP_FILE_8" value="Observación 5" required onclick="app.capturePhoto(this, 'P')">
                         <progress id="CADP_FILE_8_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="CADP_FILE_8Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="CADP_FILE_9" value="Anomalía 6" required onclick="app.capturePhoto(this, 'P')">
+                        <input type="button" class="form-control" id="CADP_FILE_9" value="Observación 6" required onclick="app.capturePhoto(this, 'P')">
                         <progress id="CADP_FILE_9_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="CADP_FILE_9Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="CADP_FILE_10" value="Anomalía 7" required onclick="app.capturePhoto(this, 'P')">
+                        <input type="button" class="form-control" id="CADP_FILE_10" value="Observación 7" required onclick="app.capturePhoto(this, 'P')">
                         <progress id="CADP_FILE_10_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="CADP_FILE_10Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="CADP_FILE_11" value="Anomalía 8" required onclick="app.capturePhoto(this, 'P')">
+                        <input type="button" class="form-control" id="CADP_FILE_11" value="Observación 8" required onclick="app.capturePhoto(this, 'P')">
                         <progress id="CADP_FILE_11_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="CADP_FILE_11Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="CADP_FILE_12" value="Anomalía 9" required onclick="app.capturePhoto(this, 'P')">
+                        <input type="button" class="form-control" id="CADP_FILE_12" value="Observación 9" required onclick="app.capturePhoto(this, 'P')">
                         <progress id="CADP_FILE_12_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="CADP_FILE_12Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="CADP_FILE_13" value="Anomalía 10" required onclick="app.capturePhoto(this, 'P')">
+                        <input type="button" class="form-control" id="CADP_FILE_13" value="Observación 10" required onclick="app.capturePhoto(this, 'P')">
                         <progress id="CADP_FILE_13_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="CADP_FILE_13Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="CADP_FILE_14" value="Anomalía 11" required onclick="app.capturePhoto(this, 'P')">
+                        <input type="button" class="form-control" id="CADP_FILE_14" value="Observación 11" required onclick="app.capturePhoto(this, 'P')">
                         <progress id="CADP_FILE_14_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="CADP_FILE_14Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="CADP_FILE_15" value="Anomalía 12" required onclick="app.capturePhoto(this, 'P')">
+                        <input type="button" class="form-control" id="CADP_FILE_15" value="Observación 12" required onclick="app.capturePhoto(this, 'P')">
                         <progress id="CADP_FILE_15_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="CADP_FILE_15Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="CADP_FILE_16" value="Anomalía 13" required onclick="app.capturePhoto(this, 'P')">
+                        <input type="button" class="form-control" id="CADP_FILE_16" value="Observación 13" required onclick="app.capturePhoto(this, 'P')">
                         <progress id="CADP_FILE_16_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="CADP_FILE_16Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="CADP_FILE_17" value="Anomalía 14" required onclick="app.capturePhoto(this, 'P')">
+                        <input type="button" class="form-control" id="CADP_FILE_17" value="Observación 14" required onclick="app.capturePhoto(this, 'P')">
                         <progress id="CADP_FILE_17_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="CADP_FILE_17Obs" placeholder="Observaciones">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="CADP_FILE_18" value="Anomalía 15" required onclick="app.capturePhoto(this, 'P')">
+                        <input type="button" class="form-control" id="CADP_FILE_18" value="Observación 15" required onclick="app.capturePhoto(this, 'P')">
                         <progress id="CADP_FILE_18_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="CADP_FILE_18Obs" placeholder="Observaciones">
                     </div>
