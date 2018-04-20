@@ -64,6 +64,7 @@ var app =
     },
 
     showTally: function (mode) {
+        $("#cabecera").text("Tally " + mode);
         $("#divMain").hide();
         $("#divTally").show();
         $("#tallyError").hide();
@@ -87,8 +88,10 @@ var app =
     showHideNroContenedor: function () {
         if ($("#tTipoDeVehiculo").val().indexOf("Contenedor") == 0) {
             $("#tNroContenedor").show();
+            $("#tNroContenedor")[0].required = true;
         } else {
             $("#tNroContenedor").hide();
+            $("#tNroContenedor")[0].required = false;
         }
     },
 
@@ -124,6 +127,7 @@ var app =
                 data: { id: app.ENTITY_TALLY_ID, schemaId: app.SCHEMA_ID },
                 callback: function (data) {
                     try {
+                        $("#tCliente").append("<option style='display:none'>");
                         $.each(data[app.ID_CLIENTE], function () {
                             $("#tCliente").append("<option value='" + this.value + "'>" + this.text + "</option>");
                         });
@@ -348,6 +352,8 @@ var app =
             TALL_FINALIZACION_DE_DESC: app.formatTime(new Date()),
             TALL_MODE: app.tallyMode
         };
+
+
 
         if (app.currentTallyId) { tally.id = app.currentTallyId; }
         libs.callRPC(
