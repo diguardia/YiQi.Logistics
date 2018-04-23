@@ -143,19 +143,19 @@
             <form role="form" data-toggle="validator" id="formLogin">
                 <h2 id="cabecera"></h2>
                 <div class="form-group">
-                    <select type="name" class="form-control" id="tCliente" placeholder="Cliente/Origen" required></select>
+                    <select type="name" class="form-control" id="tCliente" placeholder="Cliente/Origen"></select>
                 </div>
                 <div class="form-group">
-                    <input type="name" class="form-control" id="tPuerto" placeholder="Origen" required>
+                    <input type="name" class="form-control" id="tPuerto" placeholder="Origen">
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" id="tRto" placeholder="Nro de Remito" required>
+                    <input type="number" class="form-control" id="tRto" placeholder="Nro de Remito">
                 </div>
                 <div class="form-group">
                     <input type="date" class="form-control" id="tFechaRecepcion" placeholder="Fecha recepción" required>
                 </div>
                 <div class="form-group">
-                    <select class="form-control" id="tTipoDeVehiculo" placeholder="Tipo de unidad" required onchange="app.showHideNroContenedor()">
+                    <select class="form-control" id="tTipoDeVehiculo" placeholder="Tipo de unidad" onchange="app.showHideNroContenedor()">
                         <option style="display:none">
                         <option>Camioneta</option>
                         <option>Chasis</option>
@@ -169,19 +169,19 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <input type="name" class="form-control" id="tChofer" placeholder="Chofer" required>
+                    <input type="name" class="form-control" id="tChofer" placeholder="Chofer">
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" id="tPrecintos" placeholder="Nro de Precinto" required>
+                    <input type="number" class="form-control" id="tPrecintos" placeholder="Nro de Precinto" >
                 </div>
                 <div class="form-group">
                     <input type="number" class="form-control" id="tNroContenedor" placeholder="Nro Contenedor">
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" id="tBultosSegunRTOPL" placeholder="Bultos Según Rto/PL" required>
+                    <input type="number" class="form-control" id="tBultosSegunRTOPL" placeholder="Bultos Según Rto/PL">
                 </div>
                 <div class="form-group">
-                    <input type="name" class="form-control" id="tPatentes" placeholder="Patentes" required>
+                    <input type="name" class="form-control" id="tPatentes" placeholder="Patentes">
                 </div>
                 
                 <button type="button" id="butUploadTallyHeader" class="btn btn-default" onclick="app.uploadTallyHeader();">Cargar cabecera</button>
@@ -318,13 +318,13 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="number" class="form-control" id="tBultosReales" placeholder="Bultos Reales" required>
+                        <input type="number" class="form-control" id="tBultosReales" placeholder="Bultos Reales">
                     </div>
                     <div class="form-group">
-                        <input type="number" class="form-control" id="tBultosConObservaciones" placeholder="Bultos Con Observaciones" required>
+                        <input type="number" class="form-control" id="tBultosConObservaciones" placeholder="Bultos Con Observaciones" >
                     </div>
                     <div class="form-group">
-                        <input type="number" class="form-control" id="tPallets" placeholder="Pallets logrados" required>
+                        <input type="number" class="form-control" id="tPallets" placeholder="Pallets logrados">
                     </div>
                     <button type="button" id="uploading" class="btn btn-default" onclick="app.submitTally();">Subir Tally</button>
                 </div>
