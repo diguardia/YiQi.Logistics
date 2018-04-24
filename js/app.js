@@ -234,10 +234,18 @@ var app =
         } else if ($("#tTipoDeVehiculo").val() == "" || $("#tTipoDeVehiculo").val == null) {
             $("#tallyError").text("Por favor completar Tipo de unidad");
         } else if ($("#tBultosSegunRTOPL").val() == "" || $("#tBultosSegunRTOPL").val == null) {
-            $("#tallyError").text("Por favor completar Bultos Según Rto/PL");
+            $("#tallyError").text("Por favor completar Bultos Según Rto/Packing list");
         } else if ($("#tPatentes").val() == "" || $("#tPatentes").val == null) {
-            $("#tallyError").text("Por favor completar Patentes");
-        } else {
+            $("#tallyError").text("Por favor completar Patente Tractor");
+        }  else if ($("#tPatenteSemi").val() == "" || $("#tPatenteSemi").val == null) {
+            $("#tallyError").text("Por favor completar Patente Semi");
+        }
+        else if ($("#tTipoDeVehiculo").val().indexOf("Contenedor") == 0 && ($("#tNroContenedor").val() == "" || $("#tNroContenedor").val == null))
+        {
+            $("#tallyError").text("Por favor completar Nro Contenedor");
+            
+        }
+        else {
             return true;
         }
         return false;
@@ -252,6 +260,7 @@ var app =
         $("#tTipoDeVehiculo")[0].required = b;
         $("#tBultosSegunRTOPL")[0].required = b;
         $("#tPatentes")[0].required = b;
+        $("#tPatenteSemi")[0].required = b;
     },
 
     requiredImageImput: function (b) {
@@ -311,6 +320,7 @@ var app =
                     $("#tBultosReales").removeAttr('value');
                     $("#tBultosConObservaciones").removeAttr('value');
                     $("#tPatentes").removeAttr('value');
+                    $("#tPatenteSemi").removeAttr('value');
                     for (i = 1; i <= app.FILE_COUNT; i++) {
                         $("#TALL_FILE_" + i).addClass("btn-default");
                         $("#TALL_FILE_" + i).removeClass("btn-success");
@@ -336,7 +346,7 @@ var app =
                 $("#tallyError").show();
             }
         } else {
-            $("#tallyError").text("Las imágenes: Camión Cerrado, Precinto, Abierto antes de atracar,  Al  80%, Al 50%, Vacio y Remito son obligatorios");
+            $("#tallyError").text("Las imágenes: Camión Cerrado, Precinto, Al 100%,  Al  80%, Al 50%, Vacio y Remito son obligatorios");
             $("#tallyError").show();
             $("#uploading").show();
             $("#loadinguUpload").hide();
@@ -395,6 +405,7 @@ var app =
             TALL_TIPO_DE_VEHICULO: $("#tTipoDeVehiculo").val(),
             TALL_BULTOS_SEGUN_RTO: $("#tBultosSegunRTOPL").val(),
             TALL_PATENTES: $("#tPatentes").val(),
+            TALL_PATENTE_SEMI: $("#tPatenteSemi").val(),
             TALL_OBSERVACION_1: $("#TALL_FILE_8Obs").val(),
             TALL_OBSERVACION_2: $("#TALL_FILE_9Obs").val(),
             TALL_OBSERVACION_3: $("#TALL_FILE_10Obs").val(),

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>YiQi Logistics</title>
+    <title>YiQi Tally</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -64,7 +64,7 @@
     <nav class="navbar navbar-fixed-top header_bg">
         <div class="container">
             <div class="header">
-                <div class="logo"><img src2="images/dhl_logo.png" src="images/s2s_logo.png" width="160" height="65"></div>
+                <div class="logo"><img src2="images/dhl_logo.png" src="images/logo.png"></div>
                 <nav>
                     <ul class="nav nav-pills pull-right" id="divLinksHeaders">
                         <li role="presentation">
@@ -178,10 +178,13 @@
                     <input type="number" class="form-control" id="tNroContenedor" placeholder="Nro Contenedor">
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" id="tBultosSegunRTOPL" placeholder="Bultos Según Rto/PL">
+                    <input type="number" class="form-control" id="tBultosSegunRTOPL" placeholder="Bultos Según Rto/Packing list">
                 </div>
                 <div class="form-group">
-                    <input type="name" class="form-control" id="tPatentes" placeholder="Patentes">
+                    <input type="name" class="form-control" id="tPatentes" placeholder="Patente Tractor">
+                </div>
+                <div class="form-group">
+                    <input type="name" class="form-control" id="tPatenteSemi" placeholder="Patente Semi">
                 </div>
                 
                 <button type="button" id="butUploadTallyHeader" class="btn btn-default" onclick="app.uploadTallyHeader();">Cargar cabecera</button>
@@ -197,7 +200,7 @@
                         <progress id="TALL_FILE_2_P" style="width:100%" max="100"></progress>
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_3" value="Abierto antes de atracar" required onclick="app.capturePhoto(this,'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_3" value="Al 100%" required onclick="app.capturePhoto(this,'T')">
                         <progress id="TALL_FILE_3_P" style="width:100%" max="100"></progress>
                     </div>
                     <div class="form-group">
