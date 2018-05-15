@@ -64,6 +64,7 @@ var app =
     },
 
     showTally: function (mode) {
+        $("#cabecera").text("Tally " + mode);
         $("#divMain").hide();
         $("#divTally").show();
         $("#tallyError").hide();
@@ -87,8 +88,10 @@ var app =
     showHideNroContenedor: function () {
         if ($("#tTipoDeVehiculo").val().indexOf("Contenedor") == 0) {
             $("#tNroContenedor").show();
+            $("#tNroContenedor")[0].required = true;
         } else {
             $("#tNroContenedor").hide();
+            $("#tNroContenedor")[0].required = false;
         }
     },
 
@@ -124,6 +127,7 @@ var app =
                 data: { id: app.ENTITY_TALLY_ID, schemaId: app.SCHEMA_ID },
                 callback: function (data) {
                     try {
+                        $("#tCliente").append("<option style='display:none'>");
                         $.each(data[app.ID_CLIENTE], function () {
                             $("#tCliente").append("<option value='" + this.value + "'>" + this.text + "</option>");
                         });
@@ -131,7 +135,7 @@ var app =
                         $.each(data[app.ID_TIPO_UNIDAD], function () {
                             $("#tTipoDeUnidad").append("<option value='" + this.value + "'>" + this.text + "</option>");
                         });
-                       
+
                         libs.callRPC(
                             {
                                 url: "/api/entitiesApi/GetRootDropdowns",
@@ -144,7 +148,7 @@ var app =
 
                                         $("#divSincronizing").hide();
                                         callback();
-                                       
+
                                     }
                                     catch (ex) {
                                         alert("Error al cargar los datos sincronizados " + ex);
@@ -154,7 +158,7 @@ var app =
                                     alert("Error al buscar datos sincronizados " + error);
                                 }
                             });
-                      
+
                     }
                     catch (ex) {
                         alert("Error al cargar los datos sincronizados " + ex);
@@ -202,10 +206,67 @@ var app =
 
     uploadTallyHeader: function () {
         app.currentTallyId = null;
-        app.uploadTally(function (c) {
-            $("#divTallyImages").show();
-            $("#butUploadTallyHeader").hide();
-        })
+        app.requiredHeaderImput(true);
+        var upload = app.validateHeader();
+        if (upload) {
+            app.uploadTally(function (c) {
+                $("#divTallyImages").show();
+                $("#tallyError").hide();
+                $("#butUploadTallyHeader").hide();
+            })
+        } else {
+            $("#tallyError").show();
+        }
+    },
+
+    validateHeader: function () {
+
+        if ($("#tChofer").val() == "" || $("#tChofer").val == null) {
+            $("#tallyError").text("Por favor completar Chofer");
+        } else if ($("#tCliente").val() == "" || $("#tCliente").val == null) {
+            $("#tallyError").text("Por favor completar Cliente");
+        } else if ($("#tPuerto").val() == "" || $("#tPuerto").val == null) {
+            $("#tallyError").text("Por favor completar Origen");
+        } else if ($("#tRto").val() == "" || $("#tRto").val == null) {
+            $("#tallyError").text("Por favor completar Nro de Remito");
+        } else if ($("#tPrecintos").val() == "" || $("#tPrecintos").val == null) {
+            $("#tallyError").text("Por favor completar Nro de Precinto");
+        } else if ($("#tTipoDeVehiculo").val() == "" || $("#tTipoDeVehiculo").val == null) {
+            $("#tallyError").text("Por favor completar Tipo de unidad");
+        } else if ($("#tBultosSegunRTOPL").val() == "" || $("#tBultosSegunRTOPL").val == null) {
+            $("#tallyError").text("Por favor completar Bultos Según Rto/Packing list");
+        } else if ($("#tPatentes").val() == "" || $("#tPatentes").val == null) {
+            $("#tallyError").text("Por favor completar Patente Tractor");
+        }  else if ($("#tPatenteSemi").val() == "" || $("#tPatenteSemi").val == null) {
+            $("#tallyError").text("Por favor completar Patente Semi");
+        }
+        else if ($("#tTipoDeVehiculo").val().indexOf("Contenedor") == 0 && ($("#tNroContenedor").val() == "" || $("#tNroContenedor").val == null))
+        {
+            $("#tallyError").text("Por favor completar Nro Contenedor");
+            
+        }
+        else {
+            return true;
+        }
+        return false;
+    },
+
+    requiredHeaderImput: function (b) {
+        $("#tChofer")[0].required = b;
+        $("#tCliente")[0].required = b;
+        $("#tPuerto")[0].required = b;
+        $("#tRto")[0].required = b;
+        $("#tPrecintos")[0].required = b;
+        $("#tTipoDeVehiculo")[0].required = b;
+        $("#tBultosSegunRTOPL")[0].required = b;
+        $("#tPatentes")[0].required = b;
+        $("#tPatenteSemi")[0].required = b;
+    },
+
+    requiredImageImput: function (b) {
+        $("#tBultosConObservaciones")[0].required = b;
+        $("#tPallets")[0].required = b;
+        $("#tBultosReales")[0].required = b;
     },
 
     uploadProcessHeader: function () {
@@ -222,47 +283,70 @@ var app =
         app.showLogin();
     },
 
+    validateImages: function () {
+        if ($("#tBultosReales").val() == "" || $("#tBultosReales").val == null) {
+            $("#tallyError").text("Por favor completar Bultos reales");
+        } else if ($("#tBultosConObservaciones").val() == "" || $("#tBultosConObservaciones").val == null) {
+            $("#tallyError").text("Por favor completar Bultos con observaciones");
+        } else if ($("#tPallets").val() == "" || $("#tPallets").val == null) {
+            $("#tallyError").text("Por favor completar Pallets logrados");
+        } else {
+            return true;
+        }
+        return false;
+    },
+
     submitTally: function () {
         $("#uploading").hide();
         if ($("#TALL_FILE_1").hasClass("btn-success") && $("#TALL_FILE_2").hasClass("btn-success") && $("#TALL_FILE_3").hasClass("btn-success") && $("#TALL_FILE_4").hasClass("btn-success") && $("#TALL_FILE_5").hasClass("btn-success") && $("#TALL_FILE_6").hasClass("btn-success") && $("#TALL_FILE_7").hasClass("btn-success")) {
-            app.uploadTally(function () {
-                app.showMain("Tally subido con éxito");
+            requiredImageImput(true);
+            var upload = app.validateImages();
+            if (upload) {
 
-                $("#tChofer").val("");
-                $("#tCliente").val("");
-                $("#tPuerto").val("");
-                var date = new Date();
-                $("#tFechaRecepcion").val(date.toISOString().split('T')[0]);
-
-                $("#tRto").val("");
-                $("#tPrecintos").val("");
-                $("#tTipoDeVehiculo").val("");
-                $("#tNroContenedor").val("");
-                $("#tBultosSegunRTOPL").val("");
-                $("#tBultosReales").val("");
-                $("#tBultosConObservaciones").val("");
-                $("#tPatentes").val("");
-                for (i = 1; i <= app.FILE_COUNT; i++) {
-                    $("#TALL_FILE_" + i).addClass("btn-default");
-                    $("#TALL_FILE_" + i).removeClass("btn-success");
-                    $("#TALL_FILE_" + i).removeClass("btn-info");
-                    $("#TALL_FILE_" + i).removeClass("btn-warning");
-                    $("#TALL_FILE_" + i + "_P").hide();
-                    $("#TALL_FILE_" + i + "_P")[0].value = 0;
+                app.uploadTally(function () {
+                    app.showMain("Tally subido con éxito");
+                    requiredHeaderImput(false);
+                    $("#tChofer").removeAttr('value');
+                    $("#tCliente").removeAttr('value');
+                    $("#tPuerto").removeAttr('value');
+                    var date = new Date();
+                    $("#tFechaRecepcion").val(date.toISOString().split('T')[0]);
+                    $("#tRto").removeAttr('value');
+                    $("#tPrecintos").removeAttr('value');
+                    $("#tTipoDeVehiculo").removeAttr('value');
+                    $("#tNroContenedor").removeAttr('value');
+                    $("#tNroContenedor")[0].required = false;
+                    $("#tBultosSegunRTOPL").removeAttr('value');
+                    $("#tBultosReales").removeAttr('value');
+                    $("#tBultosConObservaciones").removeAttr('value');
+                    $("#tPatentes").removeAttr('value');
+                    $("#tPatenteSemi").removeAttr('value');
+                    for (i = 1; i <= app.FILE_COUNT; i++) {
+                        $("#TALL_FILE_" + i).addClass("btn-default");
+                        $("#TALL_FILE_" + i).removeClass("btn-success");
+                        $("#TALL_FILE_" + i).removeClass("btn-info");
+                        $("#TALL_FILE_" + i).removeClass("btn-warning");
+                        $("#TALL_FILE_" + i + "_P").hide();
+                        $("#TALL_FILE_" + i + "_P")[0].value = 0;
+                    }
+                    $("#TALL_FILE_8Obs").val("");
+                    $("#TALL_FILE_9Obs").val("");
+                    $("#TALL_FILE_10Obs").val("");
+                    $("#TALL_FILE_11Obs").val("");
+                    $("#TALL_FILE_12Obs").val("");
+                    $("#tPallets").removeAttr('value');
+                    requiredImageImput(false);
+                    $("#uploading").show();
+                    $("#loadinguUpload").hide();
+                    app.showHideNroContenedor();
+                    $("#tallyError").text("");
                 }
-                $("#TALL_FILE_8Obs").val("");
-                $("#TALL_FILE_9Obs").val("");
-                $("#TALL_FILE_10Obs").val("");
-                $("#TALL_FILE_11Obs").val("");
-                $("#TALL_FILE_12Obs").val("");
-                $("#tPallets").val();
-                $("#uploading").show();
-                $("#loadinguUpload").hide();
-                app.showHideNroContenedor();
+                );
+            } else {
+                $("#tallyError").show();
             }
-            );
         } else {
-            $("#tallyError").text("Las imágenes: Camión Cerrado, Precinto, Abierto antes de atracar,  Al  80%, Al 50%, Vacio y Remito son obligatorios");
+            $("#tallyError").text("Las imágenes: Camión Cerrado, Precinto, Al 100%,  Al  80%, Al 50%, Vacio y Remito son obligatorios");
             $("#tallyError").show();
             $("#uploading").show();
             $("#loadinguUpload").hide();
@@ -310,6 +394,7 @@ var app =
     uploadTally: function (callback) {
         $("#tallyError").hide();
         $("#loadinguUpload").show();
+
         var tally = {
             TALL_CHOFER: $("#tChofer").val(),
             CLIE_ID_CLIE: $("#tCliente").val(),
@@ -318,12 +403,9 @@ var app =
             TALL_NRO_DE_REMITO: $("#tRto").val(),
             TALL_PRECINTOS: $("#tPrecintos").val(),
             TALL_TIPO_DE_VEHICULO: $("#tTipoDeVehiculo").val(),
-            TALL_NRO_CONTENEDOR: $("#tNroContenedor").val(),
             TALL_BULTOS_SEGUN_RTO: $("#tBultosSegunRTOPL").val(),
-            TALL_BULTOS_REALES: $("#tBultosReales").val(),
-            TALL_BULTOS_CON_OBSERVACI: $("#tBultosConObservaciones").val(),
             TALL_PATENTES: $("#tPatentes").val(),
-            TALL_PALLETS: $("#tPallets").val(),
+            TALL_PATENTE_SEMI: $("#tPatenteSemi").val(),
             TALL_OBSERVACION_1: $("#TALL_FILE_8Obs").val(),
             TALL_OBSERVACION_2: $("#TALL_FILE_9Obs").val(),
             TALL_OBSERVACION_3: $("#TALL_FILE_10Obs").val(),
@@ -348,6 +430,19 @@ var app =
             TALL_FINALIZACION_DE_DESC: app.formatTime(new Date()),
             TALL_MODE: app.tallyMode
         };
+        if ($("#tNroContenedor").val() != "" && $("#tNroContenedor").val() != null) {
+            tally.TALL_NRO_CONTENEDOR = $("#tNroContenedor").val();
+        }
+        if ($("#tBultosReales").val() != "" && $("#tBultosReales").val() != null) {
+            tally.TALL_BULTOS_REALES = $("#tBultosReales").val();
+        }
+        if ($("#tBultosConObservaciones").val() != "" && $("#tBultosConObservaciones").val() != null) {
+            tally.TALL_BULTOS_CON_OBSERVACI= $("#tBultosConObservaciones").val();
+        }
+        if ($("#tPallets").val() != "" && $("#tPallets").val() != null) {
+            tally.TALL_PALLETS= $("#tPallets").val();
+        }
+
 
         if (app.currentTallyId) { tally.id = app.currentTallyId; }
         libs.callRPC(
@@ -359,7 +454,7 @@ var app =
                     , json: JSON.stringify(tally)
                     , jsonNewFiles: JSON.stringify(app.images)
                     , jsonRemovedFiles: JSON.stringify([])
-                    , async:false
+                    , async: false
                 }
                 , callback: function (c) {
                     $("#uploading").show();
@@ -393,7 +488,7 @@ var app =
             CADP_ESTAMPILLA: $("#Estampilla")[0].checked,
             CADP_ETIQUETA: $("#Etiqueta")[0].checked,
             CADP_ALARMADO: $("#Alarmado")[0].checked,
-            CADP_PLASTIFLECHA: $("#Plastiflecha").val(), 
+            CADP_PLASTIFLECHA: $("#Plastiflecha").val(),
             CADP_OBSERVACION_14: $("#CADP_FILE_4Obs").val(),
             CADP_OBSERVACION_15: $("#CADP_FILE_5Obs").val(),
             CADP_OBSERVACION_1: $("#CADP_FILE_6Obs").val(),
@@ -409,7 +504,7 @@ var app =
             CADP_OBSERVACION_11: $("#CADP_FILE_16Obs").val(),
             CADP_OBSERVACION_12: $("#CADP_FILE_17Obs").val(),
             CADP_OBSERVACION_13: $("#CADP_FILE_18Obs").val()
-  
+
 
         };
 
@@ -446,14 +541,14 @@ var app =
             });
     },
 
-    capturePhoto: function (imgBut,ToP) {
+    capturePhoto: function (imgBut, ToP) {
         $(imgBut).removeClass("btn-info");
         $(imgBut).addClass("btn-warning");
 
         try {
             navigator.camera.getPicture(
                 function (fileURI) {
-                    app.saveFile(fileURI, function (filePath) { app.uploadFilePG(filePath, imgBut,ToP); });
+                    app.saveFile(fileURI, function (filePath) { app.uploadFilePG(filePath, imgBut, ToP); });
                 }
                 , function () { alert("error"); }
                 , { destinationType: window.Camera.DestinationType.FILE_URI }
@@ -514,7 +609,7 @@ var app =
                 });
             },
     */
-    uploadFilePG: function (imageURI, imgBut,top) {
+    uploadFilePG: function (imageURI, imgBut, top) {
         $(imgBut).removeClass("btn-info");
         $(imgBut).addClass("btn-warning");
         $(imgBut).removeClass("btn-default");
@@ -569,7 +664,7 @@ var app =
                 $(imgBut).addClass("btn-danger");
                 $(imgBut).removeClass("btn-warning");
                 $(imgBut).removeClass("btn-info");
-                setTimeout(function () { app.uploadFilePG(imageURI, imgBut,top); }, 1000 * 15);
+                setTimeout(function () { app.uploadFilePG(imageURI, imgBut, top); }, 1000 * 15);
                 console.log(error);
                 //                alert("Error al subir el archivo. Se reintentará en un minuto");
             },

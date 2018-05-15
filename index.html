@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>YiQi Logistics</title>
+    <title>YiQi Tally</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -64,7 +64,7 @@
     <nav class="navbar navbar-fixed-top header_bg">
         <div class="container">
             <div class="header">
-                <div class="logo"><img src2="images/dhl_logo.png" src="images/s2s_logo.png" width="160" height="65"></div>
+                <div class="logo"><img src2="images/dhl_logo.png" src="images/logo.png"></div>
                 <nav>
                     <ul class="nav nav-pills pull-right" id="divLinksHeaders">
                         <li role="presentation">
@@ -141,22 +141,22 @@
         </div>
         <div id="divTally" style="display:none">
             <form role="form" data-toggle="validator" id="formLogin">
-                <H2>Cabecera</H2>
+                <h2 id="cabecera"></h2>
                 <div class="form-group">
-                    <select type="name" class="form-control" id="tCliente" placeholder="Cliente/Origen" required>
-                    </select>
+                    <select type="name" class="form-control" id="tCliente" placeholder="Cliente/Origen"></select>
                 </div>
                 <div class="form-group">
-                    <input type="name" class="form-control" id="tPuerto" placeholder="Puerto" required>
+                    <input type="name" class="form-control" id="tPuerto" placeholder="Origen">
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" id="tRto" placeholder="Remito" required>
+                    <input type="number" class="form-control" id="tRto" placeholder="Nro de Remito">
                 </div>
                 <div class="form-group">
                     <input type="date" class="form-control" id="tFechaRecepcion" placeholder="Fecha recepción" required>
                 </div>
                 <div class="form-group">
-                    <select class="form-control" id="tTipoDeVehiculo" placeholder="Tipo de unidad" required onchange="app.showHideNroContenedor()">
+                    <select class="form-control" id="tTipoDeVehiculo" placeholder="Tipo de unidad" onchange="app.showHideNroContenedor()">
+                        <option style="display:none">
                         <option>Camioneta</option>
                         <option>Chasis</option>
                         <option>Contenedores 20</option>
@@ -169,30 +169,24 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" id="tPrecintos" placeholder="Precintos" required>
-                </div>
-               
-                <div class="form-group">
-                    <input type="number" class="form-control" id="tNroContenedor" placeholder="Nro Contenedor" required>
+                    <input type="name" class="form-control" id="tChofer" placeholder="Chofer">
                 </div>
                 <div class="form-group">
-                    <input type="name" class="form-control" id="tChofer" placeholder="Chofer" required>
+                    <input type="number" class="form-control" id="tPrecintos" placeholder="Nro de Precinto" >
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" id="tBultosSegunRTOPL" placeholder="Bultos Según Rto/PL" required>
+                    <input type="number" class="form-control" id="tNroContenedor" placeholder="Nro Contenedor">
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" id="tBultosReales" placeholder="Bultos Reales" required>
+                    <input type="number" class="form-control" id="tBultosSegunRTOPL" placeholder="Bultos Según Rto/Packing list">
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" id="tBultosConObservaciones" placeholder="Bultos Con Observaciones" required>
+                    <input type="name" class="form-control" id="tPatentes" placeholder="Patente Tractor">
                 </div>
                 <div class="form-group">
-                    <input type="name" class="form-control" id="tPatentes" placeholder="Patentes" required>
+                    <input type="name" class="form-control" id="tPatenteSemi" placeholder="Patente Semi">
                 </div>
-                <div class="form-group">
-                    <input type="number" class="form-control" id="tPallets" placeholder="Pallets logrados" required>
-                </div>
+                
                 <button type="button" id="butUploadTallyHeader" class="btn btn-default" onclick="app.uploadTallyHeader();">Cargar cabecera</button>
                 <div id="divTallyImages">
                     <H2>Imágenes</H2>
@@ -206,7 +200,7 @@
                         <progress id="TALL_FILE_2_P" style="width:100%" max="100"></progress>
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control" id="TALL_FILE_3" value="Abierto antes de atracar" required onclick="app.capturePhoto(this,'T')">
+                        <input type="button" class="form-control" id="TALL_FILE_3" value="Al 100%" required onclick="app.capturePhoto(this,'T')">
                         <progress id="TALL_FILE_3_P" style="width:100%" max="100"></progress>
                     </div>
                     <div class="form-group">
@@ -324,6 +318,16 @@
                         <input type="button" class="form-control" id="TALL_FILE_27" value="Observación 20" required onclick="app.capturePhoto(this, 'T')">
                         <progress id="TALL_FILE_27_P" style="width:100%" max="100"></progress>
                         <input type="name" class="form-control" id="TALL_FILE_27Obs" placeholder="Observaciones">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="tBultosReales" placeholder="Bultos Reales">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="tBultosConObservaciones" placeholder="Bultos Con Observaciones" >
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="tPallets" placeholder="Pallets logrados">
                     </div>
                     <button type="button" id="uploading" class="btn btn-default" onclick="app.submitTally();">Subir Tally</button>
                 </div>
