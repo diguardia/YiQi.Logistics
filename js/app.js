@@ -2,9 +2,9 @@ var app =
 {
     // Prod
     SCHEMA_ID: 35, // SPF
-    SERVER_URL: "http://aws.yiqi.com.ar/",
+    SERVER_URL: "https://me.yiqi.com.ar/",
     ENTITY_TALLY_ID: 861,
-    ID_CLIENTE: 5160,
+    ID_CLIENTE: 5324,
     CADP_ID_CLIENTE: 5615,
     ID_TIPO_UNIDAD: 5162,
     ENTITY_PROCESS_ID: 900,
@@ -142,9 +142,11 @@ var app =
                                 data: { id: app.ENTITY_PROCESS_ID, schemaId: app.SCHEMA_ID },
                                 callback: function (data2) {
                                     try {
-                                        $.each(data2[app.CADP_ID_CLIENTE], function () {
-                                            $("#pCliente").append("<option value='" + this.value + "'>" + this.text + "</option>");
-                                        });
+                                        if(data2.length != undefined){
+                                            $.each(data2[app.CADP_ID_CLIENTE], function () {
+                                                $("#pCliente").append("<option value='" + this.value + "'>" + this.text + "</option>");
+                                            });
+                                        }
 
                                         $("#divSincronizing").hide();
                                         callback();
