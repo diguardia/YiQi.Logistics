@@ -4,7 +4,7 @@ var app =
     SCHEMA_ID: 35, // SPF
     SERVER_URL: "https://me.yiqi.com.ar/",
     ENTITY_TALLY_ID: 861,
-    ID_CLIENTE: 5324,
+    ID_CLIENTE: 5160,
     CADP_ID_CLIENTE: 5615,
     ID_TIPO_UNIDAD: 5162,
     ENTITY_PROCESS_ID: 900,
