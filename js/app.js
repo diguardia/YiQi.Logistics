@@ -142,7 +142,7 @@ var app =
                                 data: { id: app.ENTITY_PROCESS_ID, schemaId: app.SCHEMA_ID },
                                 callback: function (data2) {
                                     try {
-                                        if(data2.length != undefined){
+                                        if(data2.length != undefined || data2[app.CADP_ID_CLIENTE].length != undefined){
                                             $.each(data2[app.CADP_ID_CLIENTE], function () {
                                                 $("#pCliente").append("<option value='" + this.value + "'>" + this.text + "</option>");
                                             });
